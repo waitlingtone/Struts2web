@@ -12,7 +12,7 @@
         <result name="error">/index.jsp</result>
     </action>  
     <action name="hellodiff"
-    		class="watilingtone.zylphir.action.HelloAction"
+    		class="waitlingtone.zylphir.action.HelloAction"
     		method="executediff">
     	<result name="ok">/bye.jsp</result>
     </action> 

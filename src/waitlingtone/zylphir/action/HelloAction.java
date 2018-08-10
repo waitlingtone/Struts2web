@@ -9,7 +9,7 @@ public class HelloAction {
 				return "error";
 			return "success";
 		}
-		public String executediff() throws Exception {
+		public String executediff(){
 			setName("Bye !!");
 			return "ok";
 		}
