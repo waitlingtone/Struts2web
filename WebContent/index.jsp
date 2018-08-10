@@ -13,5 +13,10 @@
     <input type="text" name="name" /> 
     <input type="submit" value="Submit" />
   </form>
+  <br/>
+  <form action="hellodiff">
+  	  <input type="text" name="name" /> 
+    <input type="submit" value="Submit" />
+  </form>
 </body>
 </html>
