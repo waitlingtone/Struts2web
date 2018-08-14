@@ -8,15 +8,14 @@
 </head>
 <body>
   <h1>Struts2 - Hello World</h1>
-  <form action="hello">
-    <label for="name">Please enter your name:</label><br/> 
-    <input type="text" name="name" /> 
-    <input type="submit" value="Submit" />
-  </form>
+  <s:form action="hello" method="post">
+    <s:textfield name="username" label="Username"/>
+    <s:password name="password" label="Password"></s:password>
+    <s:submit value="Submit" />
+  </s:form>
+  <s:form action="checkConnection.action">
+  	<s:submit value = "Test Connection"></s:submit>
+  </s:form>
   <br/>
-  <form action="hellodiff">
-  	  <input type="text" name="name" /> 
-    <input type="submit" value="Submit" />
-  </form>
 </body>
 </html>

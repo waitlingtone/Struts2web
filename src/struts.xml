@@ -9,12 +9,19 @@
             class="waitlingtone.zylphir.action.HelloAction"
             method="execute">
         <result name="success">/Hello.jsp</result>
-        <result name="error">/index.jsp</result>
+        <result name="error">/bye.jsp</result>
     </action>  
-    <action name="hellodiff"
-    		class="waitlingtone.zylphir.action.HelloAction"
-    		method="executediff">
-    	<result name="ok">/bye.jsp</result>
-    </action> 
+    <action name="checkConnection"
+            class="waitlingtone.zylphir.action.LoginAction"
+            method="checkOracleConnection">
+        <result name="success">/login-success.jsp</result>
+        <result name="error">/login-error.jsp</result>
+    </action>  
+        <action name="report"
+            class="waitlingtone.zylphir.action.LoginAction"
+            method="report">
+        <result name="success">/login-success.jsp</result>
+        <result name="error">/login-error.jsp</result>
+    </action>  
     </package>
 </struts>

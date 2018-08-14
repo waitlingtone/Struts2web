@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Bye, <s:property value="name"/>
+	Bye,	<s:textfield value="%{name}"></s:textfield>
 </body>
 </html>

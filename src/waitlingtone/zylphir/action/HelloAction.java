@@ -1,22 +1,22 @@
 package waitlingtone.zylphir.action;
+import com.opensymphony.xwork2.ActionSupport;
+public class HelloAction extends ActionSupport{
 
-public class HelloAction {
-
-		private String name;
+		private String username, password;
 		
 		public String execute() throws Exception{
-			if(this.name.isEmpty())
-				return "error";
-			return "success";
+			return SUCCESS;
 		}
 		public String executediff(){
-			setName("Bye !!");
 			return "ok";
 		}
-		public String getName() {
-			return name;
+		public String getUserName() {
+			return username;
 		}
-		public void setName(String name) {
-			this.name = name;
+		public void setUsername(String username) {
+			this.username = username;
+		}
+		public void setPassword(String password) {
+			this.password = password;
 		}
 }
