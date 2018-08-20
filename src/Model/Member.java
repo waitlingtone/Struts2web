@@ -1,5 +1,4 @@
 package Model;
-import com.opensymphony.xwork2.validator.validators.*;
 public class Member {
 	private String username;
 	private String password;
@@ -11,6 +10,8 @@ public class Member {
 		this.username = username;
 		this.password = password;
 	}
+//	@RequiredStringValidator(key = "Username is required", trim = true)
+	
 	public String getUsername() {
 		return username;
 	}
@@ -18,7 +19,7 @@ public class Member {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+//	@RequiredStringValidator(key = "Password is required", trim = true)
 	public String getPassword() {
 		return password;
 	}

@@ -15,6 +15,7 @@
             class="project.action.LoginAction"
             method="report">
         <result name="success">/login-success.jsp</result>
+         <result name="input">/index.jsp</result> 
         <result name="error">/login-error.jsp</result>
     </action>  
     <action name="login"
