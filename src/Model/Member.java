@@ -1,5 +1,5 @@
 package Model;
-
+import com.opensymphony.xwork2.validator.validators.*;
 public class Member {
 	private String username;
 	private String password;
@@ -11,7 +11,6 @@ public class Member {
 		this.username = username;
 		this.password = password;
 	}
-	
 	public String getUsername() {
 		return username;
 	}

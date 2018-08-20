@@ -1,6 +1,6 @@
 package project.action;
 import com.opensymphony.xwork2.ActionSupport;
-
+import com.opensymphony.xwork2.validator.annotations.*;
 import Model.Member;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ public class LoginAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	Member member = null;
 	List<Member> list = null;
-	
+
 	public Member getMember() {
 		return this.member;
 	}
@@ -56,6 +56,11 @@ public class LoginAction extends ActionSupport {
 	
 	public void setList(List<Member> list) {
 		this.list = list;
+	}
+	@Override
+	public void validate() {
+		// TODO Auto-generated method stub
+		super.validate();
 	}
 
 }

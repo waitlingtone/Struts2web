@@ -7,7 +7,7 @@
    <package name="default" namespace="/"  extends="struts-default">           
     </package>
     
-    <include file="struts-login.xml"></include>
-    <include file="struts-register.xml"></include>
+    <include file="classes-struts/struts-login.xml"></include>
+    <include file="classes-struts/struts-register.xml"></include>
     
 </struts>

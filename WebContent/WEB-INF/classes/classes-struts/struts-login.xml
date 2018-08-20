@@ -8,6 +8,7 @@
             class="project.action.LoginAction"
             method="checkOracleConnection">
         <result name="success">/login-success.jsp</result>
+        <result name="input">/index.jsp</result> 
         <result name="error">/login-error.jsp</result>
     </action>  
     <action name="report"
