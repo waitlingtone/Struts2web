@@ -1,4 +1,4 @@
-package waitlingtone.zylphir.action;
+package project.action;
 import com.opensymphony.xwork2.ActionSupport;
 
 import Model.Member;

@@ -10,10 +10,10 @@ import java.sql.Statement;
 
 public class LoginConnection {
 	
-	public static boolean getUser(String username, String password) throws Exception{
+	public static boolean Authenticate(String username, String password) throws Exception{
 		ResultSet rs = null;
 		try {
-				PreparedStatement stmt = ConnectionDAO.connection().prepareStatement("SELECT * FROM members WHERE username = ? and password = ?");
+				PreparedStatement stmt = ConnectionDAO.connection().prepareStatement("SELECT * FROM member WHERE username = ? and password = ?");
 				stmt.setString(1,username);
 				stmt.setString(2,password);
 				rs = stmt.executeQuery();

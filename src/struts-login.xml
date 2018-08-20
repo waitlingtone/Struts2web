@@ -5,19 +5,19 @@
 <struts>
 <package name="login" namespace="/" extends="struts-default">
     <action name="checkConnection"
-            class="waitlingtone.zylphir.action.LoginAction"
+            class="project.action.LoginAction"
             method="checkOracleConnection">
         <result name="success">/login-success.jsp</result>
         <result name="error">/login-error.jsp</result>
     </action>  
     <action name="report"
-            class="waitlingtone.zylphir.action.LoginAction"
+            class="project.action.LoginAction"
             method="report">
         <result name="success">/login-success.jsp</result>
         <result name="error">/login-error.jsp</result>
     </action>  
     <action name="login"
-            class="waitlingtone.zylphir.action.LoginAction"
+            class="project.action.LoginAction"
             method="checkLogin">
         <interceptor-ref name="defaultStack"></interceptor-ref>
         <result name="success">/Hello.jsp</result>

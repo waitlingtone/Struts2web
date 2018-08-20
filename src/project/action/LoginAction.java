@@ -1,4 +1,4 @@
-package waitlingtone.zylphir.action;
+package project.action;
 import com.opensymphony.xwork2.ActionSupport;
 
 import Model.Member;
@@ -27,15 +27,15 @@ public class LoginAction extends ActionSupport {
 		return SUCCESS;
 	}
 	public String checkLogin() throws Exception{
-		boolean bl = connection.oracle.LoginConnection.getUser(member.getUsername(),member.getPassword());
-		if(bl) {
+		boolean authenticate = connection.oracle.LoginConnection.Authenticate(member.getUsername(),member.getPassword());
+		if(authenticate) {
 			return SUCCESS;
 		}
 		return ERROR;
 	}
 	
 	public String report() throws Exception{
-		ResultSet rs = connection.oracle.LoginConnection.exeQ("SELECT USERNAME, PASSWORD, FIRST_NAME, LAST_NAME FROM MEMBERS");
+		ResultSet rs = connection.oracle.LoginConnection.exeQ("SELECT USERNAME, PASSWORD, FIRST_NAME, LAST_NAME FROM MEMBER");
 		list = new ArrayList<>();
 		if(rs != null) {
 			while(rs.next()) {

@@ -5,7 +5,7 @@
  <struts>
  <package name="register" namespace="/" extends="struts-default">
  	<action name="register"
- 			class="waitlingtone.zylphir.action.RegisterAction">
+ 			class="project.action.RegisterAction">
  		<result name="success">/register.jsp</result>
  	</action>
  
