@@ -5,23 +5,9 @@
 <struts>
 <constant name="struts.devMode" value="true" />
    <package name="default" namespace="/"  extends="struts-default">           
-    <action name="hello"
-            class="waitlingtone.zylphir.action.HelloAction"
-            method="execute">
-        <result name="success">/Hello.jsp</result>
-        <result name="error">/bye.jsp</result>
-    </action>  
-    <action name="checkConnection"
-            class="waitlingtone.zylphir.action.LoginAction"
-            method="checkOracleConnection">
-        <result name="success">/login-success.jsp</result>
-        <result name="error">/login-error.jsp</result>
-    </action>  
-        <action name="report"
-            class="waitlingtone.zylphir.action.LoginAction"
-            method="report">
-        <result name="success">/login-success.jsp</result>
-        <result name="error">/login-error.jsp</result>
-    </action>  
     </package>
+    
+    <include file="struts-login.xml"></include>
+    <include file="struts-register.xml"></include>
+    
 </struts>

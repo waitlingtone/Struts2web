@@ -1,6 +1,8 @@
 package waitlingtone.zylphir.action;
 import com.opensymphony.xwork2.ActionSupport;
 
+import Model.Member;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,15 +13,29 @@ public class LoginAction extends ActionSupport {
 	Member member = null;
 	List<Member> list = null;
 	
+	public Member getMember() {
+		return this.member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
 	public String checkOracleConnection() {
-		Connection conn = waitlingtone.zylphir.action.ConnectionDAO.connection();
+		Connection conn = connection.oracle.ConnectionDAO.connection();
 		if(conn == null)
 			return ERROR;
 		return SUCCESS;
 	}
+	public String checkLogin() throws Exception{
+		boolean bl = connection.oracle.LoginConnection.getUser(member.getUsername(),member.getPassword());
+		if(bl) {
+			return SUCCESS;
+		}
+		return ERROR;
+	}
 	
 	public String report() throws Exception{
-		ResultSet rs = waitlingtone.zylphir.action.ConnectionDAO.report();
+		ResultSet rs = connection.oracle.LoginConnection.exeQ("SELECT USERNAME, PASSWORD, FIRST_NAME, LAST_NAME FROM MEMBERS");
 		list = new ArrayList<>();
 		if(rs != null) {
 			while(rs.next()) {

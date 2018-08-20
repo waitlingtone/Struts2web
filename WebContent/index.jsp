@@ -5,12 +5,14 @@
 <html>
 <head>
 <title>Hello World</title>
+<s:head/>
 </head>
 <body>
+<s:a action="register.action">register</s:a>
   <h1>Struts2 - Hello World</h1>
-  <s:form action="hello" method="post">
-    <s:textfield name="username" label="Username"/>
-    <s:password name="password" label="Password"></s:password>
+  <s:form action="login.action" validate="true">
+    <s:textfield name="member.username" label="Username"/>
+    <s:password name="member.password" label="Password"></s:password>
     <s:submit value="Submit" />
   </s:form>
   <s:form action="checkConnection.action">

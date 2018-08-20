@@ -1,4 +1,4 @@
-package waitlingtone.zylphir.action;
+package Model;
 
 public class Member {
 	private String username;
@@ -6,6 +6,11 @@ public class Member {
 	private String f_name;
 	private String l_name;
 	
+	public Member() {}
+	public Member(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 	
 	public String getUsername() {
 		return username;
