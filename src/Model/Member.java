@@ -1,46 +1,83 @@
 package Model;
+
+import java.sql.Date;
+
 public class Member {
 	private String username;
 	private String password;
-	private String f_name;
-	private String l_name;
+	private String firstname;
+	private String lastname;
+	private String email;
+	private String address;
+	private String phone;
+	private String passport;
+	private Integer sex;
+	private java.util.Date birthday;
 	
 	public Member() {}
 	public Member(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
-//	@RequiredStringValidator(key = "Username is required", trim = true)
-	
 	public String getUsername() {
 		return username;
 	}
-	
 	public void setUsername(String username) {
 		this.username = username;
 	}
-//	@RequiredStringValidator(key = "Password is required", trim = true)
 	public String getPassword() {
 		return password;
 	}
-	
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getFirst_name() {
-		return f_name;
+	public String getFirstname() {
+		return firstname;
 	}
-
-	public void setFirst_name(String first_name) {
-		this.f_name = first_name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
-
-	public String getLast_name() {
-		return l_name;
+	public String getLastname() {
+		return lastname;
 	}
-
-	public void setLast_name(String last_name) {
-		this.l_name = last_name;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getPassport() {
+		return passport;
+	}
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+	public int getSex() {
+		return sex;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+	public java.util.Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(java.util.Date birthday) {
+		this.birthday = birthday;
+	}
+	
 }

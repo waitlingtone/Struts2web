@@ -5,17 +5,15 @@
 <struts>
 <package name="login" namespace="/" extends="struts-default">
     <action name="checkConnection"
-            class="project.action.LoginAction"
+            class="project.action.TestConnectionAction"
             method="checkOracleConnection">
         <result name="success">/login-success.jsp</result>
         <result name="input">/index.jsp</result> 
-        <result name="error">/login-error.jsp</result>
     </action>  
     <action name="report"
-            class="project.action.LoginAction"
+            class="project.action.TestConnectionAction"
             method="report">
         <result name="success">/login-success.jsp</result>
-         <result name="input">/index.jsp</result> 
         <result name="error">/login-error.jsp</result>
     </action>  
     <action name="login"

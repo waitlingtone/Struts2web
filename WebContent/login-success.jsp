@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<s:form action="report">
+<s:form action="report.action">
 	<s:submit value="get List"></s:submit>
 </s:form>
 	<table>
@@ -23,8 +23,8 @@
 		<tr>
 		<td><s:property value="username"/></td>
 		<td><s:property value ="password"/></td>
-		<td><s:property value="first_name"/></td>
-		<td><s:property value="last_name"/></td>
+		<td><s:property value="firstname"/></td>
+		<td><s:property value="lastname"/></td>
 		</tr>
 	</s:iterator>
 	</table>

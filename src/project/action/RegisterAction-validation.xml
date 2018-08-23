@@ -1,0 +1,44 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+    <!-- Validation cho Field Username -->
+    <field name="member.username">
+    	  <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>Nhập Username để đăng kí</message>
+       </field-validator>
+    </field>
+    <!-- Validation cho Field Password -->
+	<field name="member.password">
+    	  <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>Nhập Password để đăng kí</message>
+       </field-validator>
+    </field>
+    <!-- Validation cho field Email -->
+    <field name="member.email">
+    	  <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>Nhập Email để đăng kí</message>
+       </field-validator>
+    </field>
+    <!-- Validation cho field Birthday -->
+    
+    
+    <!-- Validation cho field firstname -->
+    <field name="member.firstname">
+    	  <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>Nhập tên để đăng kí</message>
+       </field-validator>
+    </field>
+    <!-- Validation cho field lastname -->
+    <field name="member.lastname">
+    	  <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>Nhập họ để đăng kí</message>
+       </field-validator>
+    </field>
+    <!-- Validation cho field Gender -->
+    
+</validators>
