@@ -7,10 +7,10 @@
  	<action name="register">
  		<result>/register.jsp</result>
  	</action>
- 	<action name="insertMemberintodatabase"
+ 	<action name="registermember"
  			class="project.action.RegisterAction"
- 			method ="insertMember">
- 		<result name="success">/register.jsp</result>
+ 			method ="registerMember">
+ 		<result name="success">/Hello.jsp</result>
  		<result name="input">/register.jsp</result>
  		<result name = "error">/index.jsp</result>
  	</action>

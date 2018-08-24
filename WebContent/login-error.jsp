@@ -10,6 +10,7 @@
 <body>
 <s:property value="username"/>
 <s:property value="password"/>
+<s:property value="authen"/>
 	<h2>Struts 2 and Oracle Database Connectivity Example</h2>
 	<p>There is some problem. Check the console log for more details.</p>
 	

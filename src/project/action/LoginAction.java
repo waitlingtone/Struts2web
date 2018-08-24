@@ -1,5 +1,6 @@
 package project.action;
 import com.opensymphony.xwork2.ActionSupport;
+
 import Model.Member;
 
 import java.sql.Connection;
@@ -15,7 +16,6 @@ public class LoginAction extends ActionSupport {
 	java.util.Date date=new java.util.Date();  
 	
 	
-	
 //	@VisitorFieldValidator
 	public Member getMember() {
 		return this.member;
@@ -25,9 +25,9 @@ public class LoginAction extends ActionSupport {
 	}
 	
 	
-	public String checkLogin() throws Exception{
-		boolean authenticate = connection.oracle.LoginConnection.Authenticate(member);
-		if(authenticate) {
+	public String authenticateMember() throws Exception{
+		Integer isActive = connection.oracle.AuthenticateMemberConnection.Authenticate(member);
+		if(isActive == 1) {
 			return SUCCESS;
 		}
 		return ERROR;

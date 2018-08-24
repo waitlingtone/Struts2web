@@ -24,7 +24,7 @@ public class TestConnectionAction extends ActionSupport {
 	}
 
 	public String report() throws Exception{
-		ResultSet rs = connection.oracle.LoginConnection.exeQ("SELECT USERNAME, PASSWORD, FIRST_NAME, LAST_NAME FROM MEMBER");
+		ResultSet rs = connection.oracle.AuthenticateMemberConnection.exeQ("SELECT USERNAME, PASSWORD, FIRST_NAME, LAST_NAME FROM MEMBER");
 		list = new ArrayList<>();
 		if(rs != null) {
 			while(rs.next()) {

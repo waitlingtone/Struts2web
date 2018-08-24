@@ -27,16 +27,15 @@ div.a{
 <sb:head/>
 </head>
 <body>
-<div class = "a">
+<div class="container">
 <h2>
 <span style = "text-align:center"> Đăng kí</span>
 </h2>
+<s:form action ="registermember" cssClass = "well form-vertical" theme = "bootstrap" method= "POST">
+<div class="form-group">
+<s:textfield  name="member.username" label="Username" ></s:textfield> <input type="button" class="btn btn-default" value="check"></input>
 </div>
-<div>
-<s:form action ="insertMemberintodatabase" cssClass = "well form-vertical" theme = "bootstrap" method= "POST">
-<s:textfield  name="member.username" label="Username" ></s:textfield>
 <s:password  name="member.password" label="Password"></s:password>
-<br>
 <s:textfield  name="member.firstname" label="First name"></s:textfield>
 <s:textfield name="member.lastname" label="Last name"></s:textfield>
 <s:textfield type="email" name="member.email" label="Email address"></s:textfield>

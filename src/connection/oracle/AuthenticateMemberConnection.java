@@ -3,6 +3,7 @@ package connection.oracle;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -11,25 +12,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.sun.glass.ui.CommonDialogs.Type;
+import com.sun.xml.internal.ws.wsdl.writer.document.Types;
+
 import Model.Member;
 
-
-public class LoginConnection {
+public class AuthenticateMemberConnection {
 	
-	public static boolean Authenticate(Member member) throws Exception{
-		ResultSet rs = null;
-		String hashPass = connection.oracle.LoginConnection.getHashedPassword(member);
-		String sql = "SELECT * FROM member WHERE username = ? and password = ?";
+	
+	public static Integer Authenticate(Member member) throws Exception{
+		Integer authenticate = 2;
+		String hashPass = getHashedPassword(member);
+		String func_authenticate = "{? = call authenticate_member(?,?)}";
 		try {
-				PreparedStatement stmt = ConnectionDAO.connection().prepareStatement(sql);
-				stmt.setString(1,member.getUsername());
-				stmt.setString(2,hashPass);
-				rs = stmt.executeQuery();
-			return rs.next();
+			CallableStatement func = ConnectionDAO.connection().prepareCall(func_authenticate);
+			func.registerOutParameter(1, java.sql.Types.INTEGER);
+			func.setString(2, member.getUsername());
+			func.setString(3, hashPass);
+			func.executeUpdate();
+			authenticate = func.getInt(1);
+			return authenticate;
 		} catch(Exception e) {
 			e.printStackTrace();
-			return false;
-		} finally {
+			return 0;
+		}finally {
 			ConnectionDAO.connection().close();
 		}
 	}
@@ -48,35 +54,32 @@ public class LoginConnection {
 			ConnectionDAO.connection().close();
 		}
 	}
-	
-
 	public static boolean registerMember(Member member) throws Exception{
-		ResultSet rs = null;
-		String sql = "Insert into MEMBER(username, password, email, first_name, last_name, address, phone, passport, sex, birthday) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
-		java.sql.Date bornin = new java.sql.Date(member.getBirthday().getTime());
-		String encryptPass = connection.oracle.LoginConnection.getHashedPassword(member);
+		String proc_insertMember = "call insert_member(?,?,?,?,?,?,?,?,?,?)";
+		String encryptPassword = getHashedPassword(member);
+		java.sql.Date birthday = new java.sql.Date(member.getBirthday().getTime());
 		try {
-				PreparedStatement stmt = ConnectionDAO.connection().prepareStatement(sql);
-				stmt.setString(1,member.getUsername());
-				stmt.setString(2,encryptPass);
-				stmt.setString(3,member.getEmail());
-				stmt.setString(4,member.getFirstname());
-				stmt.setString(5,member.getLastname());
-				stmt.setString(6,member.getAddress());
-				stmt.setString(7,member.getPhone());
-				stmt.setString(8,member.getPassport());
-				stmt.setInt(9, member.getSex());
-				stmt.setDate(10, bornin);
-				rs = stmt.executeQuery();
-			return rs.next();
+			CallableStatement call_proc = ConnectionDAO.connection().prepareCall(proc_insertMember);
+			call_proc.setString(1, member.getUsername());
+			call_proc.setString(2, encryptPassword);
+			call_proc.setString(3, member.getEmail());
+			call_proc.setString(4, member.getFirstname());
+			call_proc.setString(5, member.getLastname());
+			call_proc.setInt(6, member.getSex());
+			call_proc.setDate(7, birthday);
+			call_proc.setString(8, member.getAddress());
+			call_proc.setString(9, member.getPhone());
+			call_proc.setString(10, member.getPassport());
+			call_proc.executeUpdate();
+			return true;
 		} catch(Exception e) {
 			e.printStackTrace();
 			return false;
-		} finally {
+		}finally {
 			ConnectionDAO.connection().close();
 		}
 	}
+	
 	 public static String getHashedPassword(Member member) throws Exception {
 		    MessageDigest objMsgDigest;
 		    try {

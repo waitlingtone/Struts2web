@@ -14,13 +14,10 @@ public class RegisterAction extends ActionSupport{
 	public String execute() throws Exception{
 		return SUCCESS;
 	}
-	public String insertMember() throws Exception{
-		boolean insertRs = connection.oracle.LoginConnection.registerMember(member);
+	public String registerMember() throws Exception{
+		boolean insertRs = connection.oracle.AuthenticateMemberConnection.registerMember(member);
 		if(insertRs)
-		{
-			
 			return SUCCESS;
-		}
 		return ERROR;
 	}
 	

@@ -18,11 +18,14 @@
     </action>  
     <action name="login"
             class="project.action.LoginAction"
-            method="checkLogin">
+            method="authenticateMember">
         <interceptor-ref name="defaultStack"></interceptor-ref>
         <result name="success">/Hello.jsp</result>
         <result name="input">/index.jsp</result>
-        <result name="error">/login-error.jsp</result>
+        <result name="error">
+        <param name="authenticate"></param>
+        /login-error.jsp
+        </result>
     </action>  
 </package>
 </struts>
