@@ -54,10 +54,11 @@ public class AuthenticateMemberConnection {
 			ConnectionDAO.connection().close();
 		}
 	}
-	public static boolean registerMember(Member member) throws Exception{
-		String proc_insertMember = "call insert_member(?,?,?,?,?,?,?,?,?,?)";
+	public static Integer registerMember(Member member) throws Exception{
+		String proc_insertMember = "call insert_member(?,?,?,?,?,?,?,?,?,?,?)";
 		String encryptPassword = getHashedPassword(member);
 		java.sql.Date birthday = new java.sql.Date(member.getBirthday().getTime());
+		int rs = 0;
 		try {
 			CallableStatement call_proc = ConnectionDAO.connection().prepareCall(proc_insertMember);
 			call_proc.setString(1, member.getUsername());
@@ -70,11 +71,13 @@ public class AuthenticateMemberConnection {
 			call_proc.setString(8, member.getAddress());
 			call_proc.setString(9, member.getPhone());
 			call_proc.setString(10, member.getPassport());
+			call_proc.registerOutParameter(11, java.sql.Types.INTEGER);
 			call_proc.executeUpdate();
-			return true;
+			rs = call_proc.getInt(11);
+			return rs;
 		} catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return rs;
 		}finally {
 			ConnectionDAO.connection().close();
 		}
