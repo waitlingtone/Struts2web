@@ -5,11 +5,27 @@
 <struts>
 
 <constant name="struts.devMode" value="true" />
-   <package name="default" namespace="/"  extends="struts-default">           
+   <package name="default" namespace="/"  extends="struts-default">  
+	<interceptors>
+	<interceptor name="ClearCacheInterceptor" class="project.interceptor.ClearCacheInterceptor"/>
+	<interceptor name="LoginInterceptor" class="project.interceptor.LoginInterceptor"/>
+		
+	<interceptor-stack name="loginStack">
+		<interceptor-ref name="LoginInterceptor"/>
+		<interceptor-ref name="defaultStack"/>
+	</interceptor-stack>
+	
+	</interceptors>
+	
+	<global-results>
+		<result name="login">/WEB-INF/AuthenticatePages/login.jsp</result>
+	</global-results>
+
     </package>
     
     <include file="classes-struts/struts-login.xml"></include>
    
     <include file="classes-struts/struts-register.xml"></include>
+    <include file="classes-struts/struts-user.xml"></include>
     
 </struts>

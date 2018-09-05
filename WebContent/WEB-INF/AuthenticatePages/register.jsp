@@ -31,7 +31,7 @@ div.a{
 <h2>
 <span style = "text-align:center"> Đăng kí</span>
 </h2>
-<s:form action ="registermember" cssClass = "well form-vertical" theme = "bootstrap" method= "POST">
+<s:form action ="register-action" cssClass = "well form-vertical" theme = "bootstrap" method= "POST">
 <div class="form-group">
 <s:textfield  name="member.username" label="Username" ></s:textfield> <input type="button" class="btn btn-default" value="check"></input>
 </div>

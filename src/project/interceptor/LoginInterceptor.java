@@ -11,7 +11,7 @@ public class LoginInterceptor extends AbstractInterceptor{
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		Map<String, Object> session = invocation.getInvocationContext().getSession();
-		String member_session = (String)session.get("member.login");
+		String member_session = (String)session.get("member-login");
 		if(member_session == null || member_session.equals("")) {
 			return Action.LOGIN;
 		}else {

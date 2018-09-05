@@ -7,6 +7,14 @@
 <head>
 <title>Hello World</title>
 <style>
+div.a {
+    text-align: center;
+    font-size: 35%;
+    color : blue;
+}
+div.b{
+	text-align: center;
+}
 </style>
 
    <!-- Latest compiled and minified CSS -->
@@ -23,28 +31,29 @@
 <sb:head/>
 </head>
 <body>
-<%
-	session = request.getSession(false);
-	String session_login = (String) session.getAttribute("member-login");
-	if(session_login != null && !session_login.equals("")){
-		response.sendRedirect("home.jsp");
-		return;
-	}
-%>
-<div class = "container">
- <h2>
- 	<span style = "text-align:center"> Đăng nhập</span>
- </h2>
-
-  <div  class = "container-fluid" >
-  <s:form action="login.action"  method ="POST" cssClass="well form-vertical" theme = "bootstrap">
-  
-    <s:textfield  name="member.username" label="Username" tooltip="Nhập tên của bạn ở đây"/>
-    <s:password name="member.password" label="Password"  ></s:password>
-    <s:submit value="Submit" cssClass = "btn btn-primary"  />
-    
-  </s:form>
+<div class="container">
+<div>
+  <s:form action="register" theme = "bootstrap">
+  <div class = "b">
+  	<s:submit value = "Đăng ký" cssClass ="btn btn-danger" ></s:submit>
   </div>
- </div>
+  </s:form>
+</div>
+<div>
+  <s:form action="login" theme = "bootstrap">
+  <div class = "b">
+  	<s:submit value = "Đăng nhập" cssClass ="btn btn-danger" ></s:submit>
+  </div>
+  </s:form>
+</div>
+<div>
+  <s:form action="checkConnection.action" theme = "bootstrap">
+  <div class = "b">
+  	<s:submit value = "Test Connection" cssClass ="btn btn-danger" ></s:submit>
+  </div>
+  </s:form>
+</div>
+</div>
+
 </body>
 </html>

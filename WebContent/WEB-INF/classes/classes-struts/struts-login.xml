@@ -3,31 +3,30 @@
    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
    "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="login" namespace="/" extends="struts-default">
-<interceptors>
-<interceptor name="LoginInterceptor" class="project.interceptor.LoginInterceptor"/>
-	<interceptor-stack name="loginStack">
-		<interceptor-ref name="LoginInterceptor"/>
-		<interceptor-ref name="defaultStack"/>
-	</interceptor-stack>
-</interceptors>
+<package name="login" namespace="/" extends="default">
+
+<action name="login">
+<interceptor-ref name="loginStack"></interceptor-ref>
+	<result>/WEB-INF/AuthenticatePages/login.jsp</result>
+</action>
+
     <action name="checkConnection"
             class="project.action.TestConnectionAction"
             method="checkOracleConnection">
-        <result name="success">/test-connection.jsp</result>
-        <result name="input">/index.jsp</result> 
+        <result name="success">/WEB-INF/test-connection.jsp</result>
+        <result name="input">/WEB-INF/index.jsp</result> 
     </action>  
     <action name="report"
             class="project.action.TestConnectionAction"
             method="report">
-        <result name="success">/test-connection.jsp</result>
-        <result name="error">/error.jsp</result>
+        <result name="success">/WEB-INF/test-connection.jsp</result>
+        <result name="error">/WEB-INF/error.jsp</result>
     </action>  
-    <action name="login"
+    <action name="login-action"
             class="project.action.LoginAction"
             method="login">
         <result name="success" type="redirect">home</result>
-        <result name="input">/login.jsp</result>
+        <result name="input">/WEB-INF/AuthenticatePages/login.jsp</result>
         <result name="error">
         <param name="authenticate"></param>
         /error.jsp
@@ -35,11 +34,11 @@
     </action>  
     <action name="home" class="project.action.UserAction" method="home">
     	<interceptor-ref name="loginStack"/>
-    	<result name="login">/login.jsp</result>
-    	<result name="success">/home.jsp</result>
+    	<interceptor-ref name="ClearCacheInterceptor"/>
+    	<result name="success">/WEB-INF/HomePages/home.jsp</result>
     </action>
     <action name="logout" class="project.action.LoginAction" method="logout">
-    <result name="success">/login.jsp</result>
+    <result name="success">/WEB-INF/AuthenticatePages/login.jsp</result>
     </action>
 </package>
 </struts>
