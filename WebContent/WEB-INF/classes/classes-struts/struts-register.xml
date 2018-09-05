@@ -4,15 +4,12 @@
    "http://struts.apache.org/dtds/struts-2.0.dtd">
  <struts>
  <package name="register" namespace="/" extends="struts-default">
- 	<action name="register">
- 		<result>/register.jsp</result>
- 	</action>
  	<action name="registermember"
  			class="project.action.RegisterAction"
  			method ="registerMember">
- 		<result name="success">/Hello.jsp</result>
+ 		<result name="success">/index.jsp</result>
  		<result name="input">/register.jsp</result>
- 		<result name = "error">/index.jsp</result>
+ 		<result name = "error">/error.jsp</result>
  	</action>
  
  </package>

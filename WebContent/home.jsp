@@ -6,17 +6,6 @@
 <html>
 <head>
 <title>Hello World</title>
-<style>
-div.a {
-    text-align: center;
-    font-size: 35%;
-    color : blue;
-}
-div.b{
-	text-align: center;
-}
-</style>
-
    <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
@@ -31,28 +20,19 @@ div.b{
 <sb:head/>
 </head>
 <body>
+<%
+	session = request.getSession(false);
+	String session_login = (String) session.getAttribute("member-login");
+	if(session_login == null || session_login.equals("")){
+		response.sendRedirect("login.jsp");
+		return;
+	}
+%>
 <div class="container">
-<div>
-  <s:form action="register.jsp" theme = "bootstrap">
-  <div class = "b">
-  	<s:submit value = "Đăng ký" cssClass ="btn btn-danger" ></s:submit>
-  </div>
-  </s:form>
-</div>
-<div>
-  <s:form action="login.jsp" theme = "bootstrap">
-  <div class = "b">
-  	<s:submit value = "Đăng nhập" cssClass ="btn btn-danger" ></s:submit>
-  </div>
-  </s:form>
-</div>
-<div>
-  <s:form action="checkConnection.action" theme = "bootstrap">
-  <div class = "b">
-  	<s:submit value = "Test Connection" cssClass ="btn btn-danger" ></s:submit>
-  </div>
-  </s:form>
-</div>
+<h2> Home </h2>
+<s:form action="logout">
+<s:submit class="btn btn-success" value="Logout"/>
+</s:form>
 </div>
 
 </body>

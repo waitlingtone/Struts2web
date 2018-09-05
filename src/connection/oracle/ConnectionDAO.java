@@ -10,9 +10,9 @@ import java.sql.Statement;
 
 public class ConnectionDAO {
 	
-	private static String orcl_url = "jdbc:oracle:thin:@localhost:1521:db12c";
-	private static String orcl_connection_name = "trongle";
-	private static String orcl_password = "Trong0101";
+	private static String orcl_url = "jdbc:oracle:thin:@localhost:1521:orcl";
+	private static String orcl_connection_name = "zylphir";
+	private static String orcl_password = "Dang0706510020";
 	public static Connection connection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");

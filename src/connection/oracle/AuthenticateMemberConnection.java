@@ -4,16 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-
-import com.sun.glass.ui.CommonDialogs.Type;
-import com.sun.xml.internal.ws.wsdl.writer.document.Types;
 
 import Model.Member;
 
