@@ -6,7 +6,7 @@
 <package name="home" namespace="/" extends="default">
 
 <action name="profile" class="project.action.UserAction" method="profile">
-	<interceptor-ref name="loginStack"></interceptor-ref>
+	<interceptor-ref name="loginStack"/>
 	<result name="success">/WEB-INF/HomePages/profile.jsp</result>
 
 </action>

@@ -25,8 +25,8 @@
 <body>
 <%
 	session = request.getSession(false);
-	String session_login = (String) session.getAttribute("member-login");
-	if(session_login != null && !session_login.equals("")){
+	Integer session_login = (Integer) session.getAttribute("memberId");
+	if(session_login != null && !session_login.equals(0)){
 		response.sendRedirect("home");
 		return;
 	}
