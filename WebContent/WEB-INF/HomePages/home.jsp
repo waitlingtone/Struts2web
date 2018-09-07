@@ -23,6 +23,12 @@
 </head>
 <sb:head/>
 <body>
+<h2>
+	<s:form>
+	<s:property value="member.username"/>
+	<s:property value="member.id"/>
+	</s:form>
+</h2>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">

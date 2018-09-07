@@ -1,9 +1,10 @@
 package project.action;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 
 import Model.Member;
 
-public class RegisterAction extends ActionSupport{
+public class RegisterAction extends ActionSupport implements ModelDriven<Member>{
 	
 	/**
 	 * 
@@ -30,6 +31,10 @@ public class RegisterAction extends ActionSupport{
 	}
 	public void setMember(Member member) {
 		this.member = member;
+	}
+	@Override
+	public Member getModel() {
+		return this.member;
 	}
 	
 

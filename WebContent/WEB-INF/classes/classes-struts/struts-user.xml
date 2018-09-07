@@ -3,12 +3,11 @@
    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
    "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="login" namespace="/" extends="struts-default">
+<package name="home" namespace="/" extends="default">
 
 <action name="profile" class="project.action.UserAction" method="profile">
-<interceptor-ref name="loginStack"/>
-
-<result name="success">/WEB-INF/HomePages/profile.jsp</result>
+	<interceptor-ref name="loginStack"></interceptor-ref>
+	<result name="success">/WEB-INF/HomePages/profile.jsp</result>
 
 </action>
 </package>

@@ -3,6 +3,7 @@ package Model;
 import java.sql.Date;
 
 public class Member {
+	private String memberid;	
 	private String username;
 	private String password;
 	private String firstname;
@@ -79,5 +80,11 @@ public class Member {
 	public void setBirthday(java.util.Date birthday) {
 		this.birthday = birthday;
 	}
-	
+	public String getMemberid() {
+		return memberid;
+	}
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
+	}
+
 }
