@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+ <struts>
+ <package name="home" extends="default" namespace="/">
+ <action name="create_post" class="project.action.HomeAction" method="createPost">
+ 	<result name="success" type="redirect">home</result>
+ </action>
+ 
+ </package>
+ </struts>

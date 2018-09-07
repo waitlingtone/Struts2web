@@ -32,18 +32,17 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	
 	public String login() throws Exception{
 		Integer isActive = connection.oracle.AuthenticateMemberConnection.Authenticate(member);
-		switch(isActive) {
-		case 1:
-			session.put("member-login", member.getUsername());
+		if(isActive != 0) {
+			session.put("memberId", isActive);
+			member.setMemberId(isActive);
 			return SUCCESS;
-		default:
-			return ERROR;
 		}
+		return ERROR;
 	}
 	
 	@SkipValidation
 	public String logout() throws Exception{
-		session.remove("member-login");
+		session.remove("memberId");
 		return SUCCESS;
 	}
 	

@@ -63,17 +63,6 @@
         <p><a href="#">My Profile</a></p>
         <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
       </div>
-      <div class="well">
-        <p><a href="#">Interests</a></p>
-        <p>
-          <span class="label label-default">News</span>
-          <span class="label label-primary">W3Schools</span>
-          <span class="label label-success">Labels</span>
-          <span class="label label-info">Football</span>
-          <span class="label label-warning">Gaming</span>
-          <span class="label label-danger">Friends</span>
-        </p>
-      </div>
       <div class="alert alert-success fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
         <p><strong>Ey!</strong></p>
@@ -89,51 +78,12 @@
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
             <div class="panel-body">
-              <p contenteditable="true">Status: Feeling Blue</p>
-              <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-up"></span> Like
-              </button>     
+            <s:form cssClass="well form-vertical" theme = "bootstrap" action="create_post">
+				<s:textfield name="post.title" label="Title"></s:textfield>
+            	<s:textarea name="post.content" label="Content"></s:textarea>
+            </s:form>
+            	<s:submit id="submit_post" class="btn btn-success" value="Create"/>     
             </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>John</p>
-           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Bo</p>
-           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Jane</p>
-           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
           </div>
         </div>
       </div>
@@ -172,6 +122,20 @@
 <footer class="container-fluid text-center">
   <p>Footer Text</p>
 </footer>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$("#submit_post").click(function(e){
+		e.preventDefault();
+		var $title = $("#create_post_post_title").val();
+		var $content = $("#create_post_post_content").val();
+		$.ajax({
+			url: $("#create_post").attr("action"),
+			data: {title: $title, content: $content},
+			success: function(data){
+				console.log(data);
+			}
+		});
+	});
+</script>
 </body>
 </html>
