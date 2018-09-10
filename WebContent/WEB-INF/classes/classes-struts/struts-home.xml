@@ -3,9 +3,12 @@
    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
    "http://struts.apache.org/dtds/struts-2.0.dtd">
  <struts>
- <package name="home" extends="default" namespace="/">
- <action name="create_post" class="project.action.HomeAction" method="createPost">
- 	<result name="success" type="redirect">home</result>
+ <package name="home" extends="json-default" namespace="/">
+     <action name="create_post"
+            class="project.action.HomeAction"
+            method="createPost">
+	 <result name="success" type="json">/includes/div-post.jsp</result>
+	 <result name="error">/WEB-INF/error.jsp</result>
  </action>
  
  </package>

@@ -1,6 +1,9 @@
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
+<%@page import="com.opensymphony.xwork2.util.ValueStack"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
+<%@ taglib prefix="sj" uri="/struts-jquery-tree-tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,11 +27,6 @@
 </head>
 <sb:head/>
 <body>
-<div>
-	<s:property value="#application.member.username"/> 
-	
-</div>
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -41,7 +39,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="home">home</a></li>
         <li><a href="#">Messages</a></li>
       </ul>
       <%-- <form class="navbar-form navbar-right" role="search">
@@ -87,25 +85,18 @@
             <s:form cssClass="well form-vertical" theme = "bootstrap" action="create_post">
 				<s:textfield name="post.title" label="Title"></s:textfield>
             	<s:textarea name="post.content" label="Content"></s:textarea>
+            	            	<s:submit id="submit_post" class="btn btn-success" value="Create"/>   
             </s:form>
-            	<s:submit id="submit_post" class="btn btn-success" value="Create"/>     
+
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Anja</p>
-           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>     
+      <div id="resultDiv">
+      <s:iterator value="list">
+		<%@ include file="/includes/div-post.jsp" %>
+      </s:iterator>     
+    </div>
     </div>
     <div class="col-sm-2 well">
       <div class="thumbnail">
@@ -129,19 +120,6 @@
   <p>Footer Text</p>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$("#submit_post").click(function(e){
-		e.preventDefault();
-		var $title = $("#create_post_post_title").val();
-		var $content = $("#create_post_post_content").val();
-		$.ajax({
-			url: $("#create_post").attr("action"),
-			data: {title: $title, content: $content},
-			success: function(data){
-				console.log(data);
-			}
-		});
-	});
-</script>
+<script type="text/javascript" src='<s:url value="/includes/script/home-script.js"/>'></script>
 </body>
 </html>

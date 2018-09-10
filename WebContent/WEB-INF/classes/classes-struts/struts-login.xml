@@ -14,7 +14,8 @@
             class="project.action.TestConnectionAction"
             method="checkOracleConnection">
         <result name="success">/WEB-INF/test-connection.jsp</result>
-        <result name="input">/WEB-INF/index.jsp</result> 
+        <result name="input">/WEB-INF/index.jsp</result>
+        <result name="error">/WEB-INF/error.jsp</result> 
     </action>  
     <action name="report"
             class="project.action.TestConnectionAction"
@@ -28,11 +29,10 @@
         <result name="success" type="redirect">home</result>
         <result name="input">/WEB-INF/AuthenticatePages/login.jsp</result>
         <result name="error">
-        <param name="authenticate"></param>
-        /error.jsp
+        /WEB-INF/error.jsp
         </result>
     </action>  
-    <action name="home" class="project.action.UserAction" method="home">
+    <action name="home" class="project.action.HomeAction" method="home">
     	<interceptor-ref name="loginStack"/>
     	<result name="success">/WEB-INF/HomePages/home.jsp</result>
     	<result name="error">/WEB-INF/error.jsp</result>
