@@ -3,12 +3,27 @@
    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
    "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
+<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+
 <package name="home" namespace="/" extends="default">
 
-<action name="profile" class="project.action.UserAction" method="profile">
+<action name="profile" class="project.action.FileUploadAction" method="profileLoad">
 	<interceptor-ref name="loginStack"/>
 	<result name="success">/WEB-INF/HomePages/profile.jsp</result>
 
 </action>
+
+<action name="uploadImg" class="project.action.FileUploadAction">
+	<interceptor-ref name="fileUpload">
+		<param name="maximumsize">2097152</param>
+		<param name="alowedType">image/png,image/gif,image/jpeg,image/pjpeg</param>
+	</interceptor-ref>
+	<interceptor-ref name="loginStack"/>
+		<result name="success">/WEB-INF/HomePages/profile.jsp</result>
+		<result name="input">/WEB-INF/HomePages/profile.jsp</result>  
+		<result name="error">/WEB-INF/error.jsp</result>
+</action>
+
 </package>
 </struts>

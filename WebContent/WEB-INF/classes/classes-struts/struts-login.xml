@@ -34,8 +34,8 @@
     </action>  
     <action name="home" class="project.action.UserAction" method="home">
     	<interceptor-ref name="loginStack"/>
-    	<interceptor-ref name="ClearCacheInterceptor"/>
     	<result name="success">/WEB-INF/HomePages/home.jsp</result>
+    	<result name="error">/WEB-INF/error.jsp</result>
     </action>
     <action name="logout" class="project.action.LoginAction" method="logout">
     <result name="success">/WEB-INF/AuthenticatePages/login.jsp</result>

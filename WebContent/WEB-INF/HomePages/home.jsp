@@ -19,16 +19,16 @@
       color: white;
       padding: 15px;
     }
+   
   </style>
 </head>
 <sb:head/>
 <body>
-<h2>
-	<s:form>
-	<s:property value="member.username"/>
-	<s:property value="member.id"/>
-	</s:form>
-</h2>
+<div>
+	<s:property value="#application.member.username"/> 
+	
+</div>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">

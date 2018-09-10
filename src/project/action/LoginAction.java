@@ -1,22 +1,26 @@
 package project.action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.ValueStack;
 
 import Model.Member;
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 public class LoginAction extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 1L;
-	Member member = null;
+	Member member = new Member();
 	List<Member> list = null;
 	java.util.Date date=new java.util.Date();  
 	private Map<String, Object> session = ActionContext.getContext().getSession();
@@ -32,9 +36,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	
 	public String login() throws Exception{
 		Integer isActive = connection.oracle.AuthenticateMemberConnection.Authenticate(member);
+		
 		if(isActive != 0) {
 			session.put("memberId", isActive);
 			member.setMemberId(isActive);
+			ServletActionContext.getContext().getApplication().put("member", member);
 			return SUCCESS;
 		}
 		return ERROR;
