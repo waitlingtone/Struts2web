@@ -13,6 +13,7 @@
 	<table>
 	<thead>
 		<tr>
+		<th>Member id</th>
 		<th>User name</th>
 		<th>Password</th>
 		<th>First name</th>
@@ -21,8 +22,9 @@
 	</thead>
 	<s:iterator value="list">
 		<tr>
+		<td><s:property value="memberId"/></td>
 		<td><s:property value="username"/></td>
-		<td><s:property value ="password"/></td>
+		<td><s:property value="password"/></td>
 		<td><s:property value="firstname"/></td>
 		<td><s:property value="lastname"/></td>
 		</tr>

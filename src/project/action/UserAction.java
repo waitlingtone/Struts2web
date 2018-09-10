@@ -14,7 +14,7 @@ import java.util.*;
 import Model.*;
 
 
-public class UserAction extends ActionSupport implements ModelDriven<Member>{
+public class UserAction extends ActionSupport{
 	
 
 	/**
@@ -22,24 +22,12 @@ public class UserAction extends ActionSupport implements ModelDriven<Member>{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Profile memProfile = null;
-	private Member member = new Member();
-	public String home() {
-		
-		
-		return SUCCESS;
-	}
 
 	public String profile() {
 		
 		return SUCCESS;
 	}
-	
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
+
 	public Profile getMemProfile() {
 		return memProfile;
 	}
@@ -47,9 +35,5 @@ public class UserAction extends ActionSupport implements ModelDriven<Member>{
 		this.memProfile = memProfile;
 	}
 
-	@Override
-	public Member getModel() {
-		// TODO Auto-generated method stub
-		return member;
-	}	
+
 }
