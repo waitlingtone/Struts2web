@@ -12,14 +12,16 @@ import Model.Post;
 public class PostConnection {
 
 	public static Integer createPost(Post post) throws SQLException{
-		String procedure = "{call authenticate_member(?,?,?)}";
+		String procedure = "{call proc_insertpost(?,?,?,?,?)}";
 		try {
 			CallableStatement callable = ConnectionDAO.connection().prepareCall(procedure);
-			callable.setString(1, post.getTitle());
-			callable.setString(2, post.getContent());
-			callable.registerOutParameter(3, java.sql.Types.INTEGER);
+			callable.setInt(1, post.getMemberId());
+			callable.setString(2, post.getTitle());
+			callable.setString(3, post.getContent());
+			callable.setString(4, post.getContent());
+			callable.registerOutParameter(5, java.sql.Types.INTEGER);
 			callable.executeUpdate();
-			int rs_int = callable.getInt(3);
+			int rs_int = callable.getInt(5);
 			return rs_int;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -30,7 +32,7 @@ public class PostConnection {
 	}
 	public static ResultSet getListPost(Integer memberId) throws SQLException{
 		ResultSet rs;
-		String query = "SELECT TITLE, CONTENT, IMAGE, UPDATE_AT FROM POST WHERE POST.MEMBERID = ?";
+		String query = "SELECT TITLE, CONTENT, IMAGE, UPDATE_AT FROM POST WHERE POST.MEMBERID = ? ORDER BY CREATE_AT DESC";
 		try {
 			PreparedStatement stmt = ConnectionDAO.connection().prepareStatement(query);
 			stmt.setInt(1, memberId);

@@ -1,10 +1,17 @@
 package Model;
 
+import java.util.Date;
+
 public class Post {
 	private int postId;
+	
 	private String title;
 	private String content;
+	
 	private int memberId;
+	private String image;
+	
+	private Date postDate;
 	public int getPostId() {
 		return postId;
 	}
@@ -28,6 +35,18 @@ public class Post {
 	}
 	public void setMemberId(int memberid) {
 		this.memberId = memberid;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public Date getPostDate() {
+		return postDate;
+	}
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 
 }

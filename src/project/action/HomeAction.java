@@ -4,12 +4,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sun.jndi.ldap.Connection;
 
-import Model.Post;
+import Model.*;
 import connection.oracle.PostConnection;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class HomeAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private Post post;
 	private List<Post> list;
+	private Profile profile;
 	private Map<String, Object> session = ActionContext.getContext().getSession();
 	public String home() throws SQLException {
 		ResultSet rs = connection.oracle.PostConnection.getListPost((Integer) session.get("memberId"));
@@ -31,6 +31,8 @@ public class HomeAction extends ActionSupport {
 				Post post = new Post();
 				post.setTitle(rs.getString("title"));
 				post.setContent(rs.getString("content"));
+				post.setImage(rs.getString("Image"));
+				post.setPostDate((java.util.Date) rs.getDate("update_at"));
 				list.add(post);
 			}
 			return SUCCESS;
@@ -50,10 +52,14 @@ public class HomeAction extends ActionSupport {
 		try {
 			post.setMemberId((int) session.get("memberId"));
 			Integer isSuccess = connection.oracle.PostConnection.createPost(post);
+			if(isSuccess == 1) {
+				return SUCCESS;
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			return ERROR;
 		}
-		return SUCCESS;
+		return ERROR;
 	}
 
 	public List<Post> getList() {
@@ -66,5 +72,13 @@ public class HomeAction extends ActionSupport {
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 }

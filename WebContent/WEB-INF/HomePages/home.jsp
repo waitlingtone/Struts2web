@@ -82,8 +82,8 @@
           <div class="panel panel-default text-left">
             <div class="panel-body">
             <s:form cssClass="well form-vertical" theme = "bootstrap" action="create_post">
-				<s:textfield name="post.title" label="Title" >${post.title}</s:textfield>
-            	<s:textarea name="post.content" label="Content" >${post.content}</s:textarea>
+				<s:textfield name="post.title" label="Title"></s:textfield>
+            	<s:textarea name="post.content" label="Content"></s:textarea>
             	            	<s:submit id="submit_post" class="btn btn-success" value="Create"/>   
             </s:form>
 
@@ -91,24 +91,11 @@
           </div>
         </div>
       </div>
-      
+      <div id="resultDiv">
       <s:iterator value="list">
-      <div class="row">
-      
-        <div class="col-sm-3">
-          <div class="well">
-           <p><s:property value="title"/></p>
-           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-          <p><s:property value="content"/></p>
-          
-          </div>
-        </div>
-      </div>
+		<%@ include file="/includes/div-post.jsp" %>
       </s:iterator>     
+    </div>
     </div>
     <div class="col-sm-2 well">
       <div class="thumbnail">
@@ -132,23 +119,6 @@
   <p>Footer Text</p>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$("#submit_post").click(function(e){
-		e.preventDefault();
-		var $postTitle = $("#create_post_post_title").val();
-		var $postContent = $("#create_post_post_content").val();
-		var $action =$("#create_post").attr("action");
-		var data = {'post.title': $postTitle, 'post.content': $postContent};
-		console.log(data);
-		$.ajax({
-			url: $action,
-			type:'POST',
-			data: {'post.title': $postTitle, 'post.content': $postContent},
-			success: function(data){
-				console.log(data);
-			}
-		});
-	});
-</script> 
+<script type="text/javascript" src='<s:url value="/includes/script/home-script.js"/>'></script>
 </body>
 </html>
