@@ -35,7 +35,7 @@ public class Profile {
 	public String getCoverPhoto() {
 		return coverPhoto;
 	}
-	public void setCoverphoto(String coverPhoto) {
+	public void setCoverPhoto(String coverPhoto) {
 		this.coverPhoto = coverPhoto;
 	}
 	

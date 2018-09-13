@@ -6,7 +6,7 @@
 <constant name="struts.enable.DynamicMethodInvocation" value="true" />
 <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
 
-<package name="home" namespace="/" extends="default">
+<package name="user" namespace="/" extends="default">
 
 <action name="profile" class="project.action.FileUploadAction" method="profileLoad">
 	<interceptor-ref name="loginStack"/>
@@ -20,7 +20,7 @@
 		<param name="alowedType">image/png,image/gif,image/jpeg,image/pjpeg</param>
 	</interceptor-ref>
 	<interceptor-ref name="loginStack"/>
-		<result name="success">/WEB-INF/HomePages/profile.jsp</result>
+		<result name="success" type="redirect">profile</result>
 		<result name="input">/WEB-INF/HomePages/profile.jsp</result>  
 		<result name="error">/WEB-INF/error.jsp</result>
 </action>

@@ -19,14 +19,18 @@ public class ProfileConnection {
 	{
 		try {
 			
-			String psQuery = "SELECT * FROM PROFILE WHERE MEMBERID = ?";
+			String psQuery = "SELECT * FROM PROFILE p JOIN Member m ON p.MemberID = m.id  WHERE p.MEMBERID = ?";
 			PreparedStatement ps = ConnectionDAO.connection().prepareStatement(psQuery);
 			ps.setInt(1, memberid);
 			rs = ps.executeQuery();	
+			return rs;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return rs;
+		finally {
+			connection.oracle.ConnectionDAO.connection().close();
+		}
 		
 	}
 	

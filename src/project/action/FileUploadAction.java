@@ -4,20 +4,23 @@ import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.components.ActionMessage;
+import org.apache.struts2.interceptor.ServletRequestAware;
+
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import Model.Member;
 import Model.Profile;
 import connection.oracle.ConnectionDAO;
 import connection.oracle.ProfileConnection;
-import oracle.ucp.jdbc.oracle.rlb.ONSRuntimeLoadBalancingEvent;
 
-public class FileUploadAction extends ActionSupport {
+public class FileUploadAction extends ActionSupport{
 	/**
 	 * 
 	 */
@@ -26,11 +29,12 @@ public class FileUploadAction extends ActionSupport {
 	private File userImage;
 	private String userImageContentType;
 	private String userImageFileName;
-	Profile memProfile = null;
-    PreparedStatement ps = null;
+	private Profile memProfile;
+	private Member member;
+	
+	PreparedStatement ps = null;
 	ResultSet rs = null;
 	String query;
-	private Map<String, Object> session;
 	Integer memberId = (Integer) ActionContext.getContext().getSession().get("memberId");
 	
 	public String profileLoad() throws SQLException
@@ -38,43 +42,55 @@ public class FileUploadAction extends ActionSupport {
 		
 		rs = (ResultSet) ProfileConnection.getProfileByID(memberId);
 		memProfile = new Profile();
-
+		member = new Member();
 	
 		while (rs.next()) {
 			memProfile.setProfileId(rs.getInt("id"));
 			memProfile.setUserId(memberId);
-			memProfile.setAvatar(rs.getString("avatar"));
-			memProfile.setCoverphoto(rs.getString("coverphoto"));
+			memProfile.setAvatar("/Struts2web"+rs.getString("avatar"));
+			memProfile.setCoverPhoto("/Struts2web"+rs.getString("coverphoto"));
+			member.setUsername(rs.getString("username"));
+			member.setFirstname(rs.getString("first_name"));
+			member.setLastname(rs.getString("last_name"));
+			member.setAddress(rs.getString("Address"));
+			member.setBirthday(rs.getDate("Birthday"));
+			member.setPhone(rs.getString("Phone"));
+			member.setMemberId(memberId);
+			
 //			session.put("userAva", memProfile.getAvatar());
 		}
-		
 		
 		return SUCCESS;
 	}
 	@Override
 	public String execute() throws Exception {
 		try
-		{
-			String filePath = ServletActionContext.getServletContext().getRealPath("/").concat("includes/pictures/avatar");
-	        System.out.println("Image Location:" + filePath);//see the server console for actual location  
-	        File fileToCreate = new File(filePath,userImageFileName);
-	        FileUtils.copyFile(userImage, fileToCreate);//copying source file to new file
-	        
-	        
-	        String loc = "includes/pictures/avatar/"+userImageFileName;
+		{	
+			String concatStr = "includes/pictures/avatar";
+			String filePath = ServletActionContext.getServletContext().getRealPath("/").concat(concatStr);
+			System.out.println("Image Loaction:" + filePath);
+			File fileToCreate = new File(filePath,userImageFileName);
+			FileUtils.copyFile(userImage, fileToCreate);
+	    
+            
+	        String local = "/includes/pictures/avatar/" + userImageFileName;
+	        System.out.println(local);
 	        query = "update PROFILE set avatar = ? where memberid= ?";
-	        
 	        ps = ConnectionDAO.connection().prepareStatement(query);
-	        ps.setString(1, loc);
+	        ps.setString(1, local);
 	        ps.setInt(2, memberId);
-	        System.out.println(query);
 	        ps.executeUpdate();
+	        return SUCCESS;
+	        
 		}
 		catch(Exception e)
 		{
 			System.out.println("uploadPicAction" + e);
+			return ERROR;
 		}
-		return SUCCESS;
+		finally {
+			ConnectionDAO.connection().close();
+		}
 	}
 	//Getter and Setter
 	public File getUserImage() {
@@ -95,6 +111,17 @@ public class FileUploadAction extends ActionSupport {
 	public void setUserImageFileName(String userImageFileName) {
 		this.userImageFileName = userImageFileName;
 	}
-	
+	 public Profile getMemProfile() {
+			return memProfile;
+		}
+	public void setMemProfile(Profile memProfile) {
+		this.memProfile = memProfile;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
 }
