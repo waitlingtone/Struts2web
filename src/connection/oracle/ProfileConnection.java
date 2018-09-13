@@ -22,7 +22,7 @@ public class ProfileConnection {
 			String psQuery = "SELECT * FROM PROFILE p JOIN Member m ON p.MemberID = m.id  WHERE p.MEMBERID = ?";
 			PreparedStatement ps = ConnectionDAO.connection().prepareStatement(psQuery);
 			ps.setInt(1, memberid);
-			rs = ps.executeQuery();	
+			rs = ps.executeQuery();
 			return rs;
 		} catch (Exception e) {
 			e.printStackTrace();
