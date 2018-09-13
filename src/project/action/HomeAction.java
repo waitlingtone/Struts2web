@@ -23,7 +23,17 @@ public class HomeAction extends ActionSupport {
 	private List<Post> list;
 	private Profile profile;
 	private Map<String, Object> session = ActionContext.getContext().getSession();
+	
+	protected void getProfileImage(Integer id)throws SQLException {
+	profile = new Profile();
+	ResultSet rs = connection.oracle.ProfileConnection.getProfileByID(id);
+		while(rs.next()) {
+			profile.setAvatar("/Struts2web"+rs.getString("Avatar"));
+			profile.setCoverphoto(rs.getString("CoverPhoto"));
+		}
+	}
 	public String home() throws SQLException {
+		getProfileImage((Integer) session.get("memberId"));
 		ResultSet rs = connection.oracle.PostConnection.getListPost((Integer) session.get("memberId"));
 		list = new ArrayList<>();
 		if(rs != null) {
@@ -50,8 +60,10 @@ public class HomeAction extends ActionSupport {
 	
 	public String createPost() throws Exception{
 		try {
+			getProfileImage((Integer) session.get("memberId"));
 			post.setMemberId((int) session.get("memberId"));
 			Integer isSuccess = connection.oracle.PostConnection.createPost(post);
+			System.out.println(post);
 			if(isSuccess == 1) {
 				return SUCCESS;
 			}

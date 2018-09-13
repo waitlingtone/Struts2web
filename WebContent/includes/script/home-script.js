@@ -1,3 +1,19 @@
+$(document).ready(function(){
+	var post_title = document.getElementById("create_post_post_title");
+	var post_content = document.getElementById("create_post_post_content");
+	$("#create_post").click(function(){
+		$("div .presentation").addClass("presentation-visited");
+	});
+	$(".presentation").click(function(){
+		if(confirm("Bạn có muốn hủy bỏ thao tác đang thực hiện hay không?")){
+			clearValue();
+		}
+	});
+	function clearValue(){
+		post_title.value="";
+		post_content.value="";
+		$(".presentation").removeClass("presentation-visited");
+	}
 	$("#submit_post").click(function(e){
 		e.preventDefault();
 		var $postTitle = $("#create_post_post_title").val();
@@ -9,21 +25,22 @@
 			type:'POST',
 			data: {'post.title': $postTitle, 'post.content': $postContent},
 			success: function(data){
-				document.getElementById("create_post_post_title").value = "";
-				document.getElementById("create_post_post_content").value = "";
-				$("#resultDiv").prepend(' <div class="row">'
-						   +'<div class="col-sm-3">'
-						     +'<div class="well">'
-						      +'<p>'+data["post"]["title"]+'</p>'
-						      +'<img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">'
-						     +'</div>'
-						   +'</div>'
-						   +'<div class="col-sm-9">'
-						     +'<div class="well">'
-						     +'<p>'+data["post"]["content"]+'</p>'
-						     +'</div>'
-						   +'</div>'
-						 +'</div>');
+				clearValue();
+				console.log(data);
+				$("#resultDiv").prepend( '<div class="post">'
+									 	+'<div class="post-header">'
+											 	+'<img src="'+data["profile"]["avatar"]+'" class="img-circle col-sm-3" alt="Avatar">'
+											 	+'<div class="post-header-content col-sm-9">'
+											 		+'<label class="post-title">'+data["post"]["title"]+'</label><br>'
+											 		+'<p align="left" class="post-date">'+data["post"]["postDate"]+'</p>'
+											 	+'</div>'
+										 	+'</div>'
+										 	+'<div class="post-content">'
+										 		+'<p align="left">'+data["post"]["content"]+'</p>'
+										 	+'</div>'
+									 +'</div>');
 			}
 		})
 	});
+
+})

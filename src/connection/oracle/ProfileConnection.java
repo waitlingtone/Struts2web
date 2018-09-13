@@ -22,11 +22,15 @@ public class ProfileConnection {
 			String psQuery = "SELECT * FROM PROFILE WHERE MEMBERID = ?";
 			PreparedStatement ps = ConnectionDAO.connection().prepareStatement(psQuery);
 			ps.setInt(1, memberid);
-			rs = ps.executeQuery();	
+			rs = ps.executeQuery();
+			return rs;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
+		} finally {
+			ConnectionDAO.connection().close();
 		}
-		return rs;
+		
 		
 	}
 	

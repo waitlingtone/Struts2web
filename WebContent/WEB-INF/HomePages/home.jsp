@@ -12,6 +12,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href='<s:url value="/includes/css/home-css.css"/>'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>    
@@ -26,7 +27,7 @@
   </style>
 </head>
 <sb:head/>
-<body>
+<body style="background-color: #f5f5f5;">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -53,7 +54,7 @@
         </div>
       </form>
        --%><ul class="nav navbar-nav navbar-right">
-        <li><a href="profile"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <li><a href="profile"><span class="glyphicon glyphicon-user"></span></a></li>
         <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
       </ul>
     </div>
@@ -76,15 +77,15 @@
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-7 main-row">
     
       <div class="row">
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
             <div class="panel-body">
             <s:form cssClass="well form-vertical" theme = "bootstrap" action="create_post">
-				<s:textfield name="post.title" label="Title"></s:textfield>
-            	<s:textarea name="post.content" label="Content"></s:textarea>
+				<s:textfield cssClass="new-post" name="post.title" label="Title"></s:textfield>
+            	<s:textarea cssClass="new-post" name="post.content" label="Content"></s:textarea>
             	            	<s:submit id="submit_post" class="btn btn-success" value="Create"/>   
             </s:form>
 
@@ -93,6 +94,7 @@
         </div>
       </div>
       <div id="resultDiv">
+      <div class="presentation"></div>
       <s:iterator value="list">
 		<%@ include file="/includes/div-post.jsp" %>
       </s:iterator>     
@@ -121,5 +123,8 @@
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src='<s:url value="/includes/script/home-script.js"/>'></script>
+<script type="text/javascript">
+
+</script>
 </body>
 </html>

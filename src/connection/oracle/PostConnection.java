@@ -18,7 +18,7 @@ public class PostConnection {
 			callable.setInt(1, post.getMemberId());
 			callable.setString(2, post.getTitle());
 			callable.setString(3, post.getContent());
-			callable.setString(4, post.getContent());
+			callable.setString(4, "/includes/pictures/avatar/defaulavatar.jpg");
 			callable.registerOutParameter(5, java.sql.Types.INTEGER);
 			callable.executeUpdate();
 			int rs_int = callable.getInt(5);

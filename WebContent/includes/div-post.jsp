@@ -1,16 +1,13 @@
- <div class="row">
- 
-   <div class="col-sm-3">
-     <div class="well">
-      <p name="title"><s:property value="title"/></p>
-      <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-      <p name="title"><s:property value="postDate"/></p>
-     </div>
-   </div>
-   <div class="col-sm-9">
-     <div class="well">
-     <p name="content"><s:property value="content"/></p>
-
-     </div>
-   </div>
+ <div class="post">
+ 	<div class="post-header">
+		 	<img src=<s:property value="profile.avatar"/> class="img-circle col-sm-3" alt="Avatar">
+		 	<div class="post-header-content col-sm-9" align="left">
+		 		<label class="post-title"><s:property value="title"/></label><br>
+		 		<p align="left" class="post-date"><s:property value="postDate"/></p>
+		 	</div>
+	 	</div>
+	 	<div class="post-content">
+	 		<p align="left"><s:property value="content"/></p>
+	 	</div>
+	 	<%@ include file="/includes/div-comment-post.jsp" %>
  </div>
