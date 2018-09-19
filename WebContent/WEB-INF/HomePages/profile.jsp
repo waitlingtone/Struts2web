@@ -10,7 +10,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+<link rel="stylesheet" href='<s:url value="/includes/css/profile-css.css"/>'>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -21,47 +21,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <sb:head/>
-<style type="text/css">
-
-	#ownerProfile
-	{
-		color:blue;
-	}
-	.col-sm-4{
-		border-right: 1px solid blue;
-		
-	}
-	.col-sm-8{
-		
-	}
-	#updateImage{
-		text-align: center;
-	}
-	
-	label[for="imageavatar_src"], label[for="username"],
-	{color:red;}
-	.label{
-		color:red;
-		width:180px;
-	    clear:left;
-	    text-align:right;
-	    padding-right:10px;
-	}
-	
-	#imageavatar_src{
-		white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    width: 250px;
-	}
-	#memberinfo{
-	 	display: grid;
- 		grid-template-columns: 1fr 3fr;
-	}
-	
-</style>
-
-
 </head>
 
 
@@ -91,42 +50,58 @@
 			    	<s:submit id="uploadAvabtn" value="Upload" align="center" cssClass="btn btn-primary" />
 			</s:form>
 		</div>
-	<div class="col-sm-8">
-			<h3>Thông tin cá nhân</h3>
-			<form action="updateMember">
-			<div id="memberinfo" >
-				<s:textfield cssClass="form-control" id="username" name="member.username" value="%{member.firstname}" label="Tên đăng nhập" disabled="true" ></s:textfield>
-				<s:textfield cssClass="form-control" id="firstname" name="member.firstname" value="%{member.firstname}" label="Tên" disabled="true" ></s:textfield>
-				<s:textfield cssClass="form-control" id="lastname" name="member.lastname" value="%{member.lastname}" label="Họ" disabled="true" ></s:textfield>
-				<s:textfield cssClass="form-control" id="birthday" name="member.birthday" value="%{member.birthday}" label="Sinh nhật" type="Date" disabled="true" ></s:textfield>
-				<s:textfield cssClass="form-control" id="phone" name="member.phone" value="%{member.phone}" label="Điện thoại" disabled="true" ></s:textfield>
-				<s:textfield cssClass="form-control" id="address" name="member.address" value="%{member.address}" label="Địa chỉ" disabled="true" ></s:textfield>
-				<button id="updatebtn" value="Cập nhật" class="form-control"></button>
-			</div>
-			</form>
-			
+		<div class="col-sm-8">
+			<div class="div-form"></div>
 		
 			
+			<div class="modal" id="update_Show">
+				<div class="modal-dialog">
+					
+					<div class="modal-content">
+						<!-- Modal header -->
+						<div class="modal-header">
+							<h4 class="modal-title">Nhập thông tin cập nhật</h4>
+							<button type="button" class="close" id="closeX">&times;</button>
+						</div>
+						<!-- Modal body -->
+						<div class="modal-body">
+						
+						</div>
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" id="saveChangebtn">Lưu thay đổi</button>
+						</div>
+					</div>
+				</div>
+		</div>
+		
+		<div class="example"></div>
+		
+		<div id="member_info" >
+				<h3>Thông tin cá nhân</h3><br>
+				<form action="updateMember" id="profileForm">
+					<input type="hidden" value="${member.memberId}" id="idmember"/>
+					<s:label value="Tên đăng nhập:"/>  <s:property value="member.username"/> <br>
+					<s:label value="Tên:"/>  <s:property value="member.firstname"/><br>
+					<s:label value="Họ:"/>  <s:property value="member.lastname"/><br>
+					<s:label value="Điện thoại:"/> <s:property value="member.phone"/><br>
+					<s:label value="Sinh nhật:"/> <s:property value="member.birthday"/><br>
+					<s:label value="Passport:"/> <s:property value="member.birthday"/><br>
+					<s:label value="Email:"/>  <s:property value="member.email"/><br>
+					<s:label value="Địa chỉ:"/>  <s:property value="member.address"/><br>
+					<s:label value="Giới tính:"/>&nbsp;
+					<s:if test="member.sex==0"> Nam</s:if>	<s:else>Nữ</s:else>
+					<s:label value="Test:"/>  <s:property value="key1"/><br>
+					<br><button id="updatebtn" class="btn btn-primary" style="float: right;">Cập nhật</button>
+					
+				
+				</form>
+				
+		</div>
+				
 	</div>
 	</div>			
 </div>
-</body>
-<script type="text/javascript">
-function readURL(input) {
-
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      $('#member_ava').attr('src', e.target.result);
-    }
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-$("#imageavatar_src").change(function() {
-  readURL(this);
-});
-</script>
+</body> 
+<script type="text/javascript" src='<s:url value="/includes/script/profile-script.js"/>'></script>
 </html>
