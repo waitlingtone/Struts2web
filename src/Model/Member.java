@@ -86,5 +86,10 @@ public class Member {
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
+	public String getName() {
+		String name;
+		name = firstname + " " + lastname;
+		return name;
+	}
 	
 }

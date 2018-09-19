@@ -53,8 +53,6 @@
 .img-circle{
 	display:inline-block;
 	float:left;
-	width: 100px;
-	height: 100px;
 	background-size: cover;
     border-radius: 50px;
 }
@@ -70,4 +68,42 @@
 	padding-left:40px;
 	align-content: center;
 	padding-right: 15px;
+}
+/********************************************************************************/
+/********************************************************************************/
+.post-footer{
+	margin-top:20px;
+	height: auto;
+	overflow: auto;
+}
+.post-footer:after, .post-footer:before{
+	margin-right: 20px;
+	margin-left: 20px;	
+}
+.post-footer input[type=text]{
+	background:#e9ebee;
+	float:left;
+	padding-left:5px;
+	width:inherit;
+	border-radius:20px;
+}
+.post-comment{
+	margin:5px;
+	margin-left: 30px;
+	margin-right: 20px;
+	overflow:auto;	
+}
+.post-comment input[type=text]{
+	height: 35px;
+	overflow: overlay;
+}
+.post-comment p,label {
+	padding-top: 10px;
+	text-align: left;
+	font-family: Time-New-Roman;
+}
+.post-comment:after, .post-comment:before{
+	box-sizing: border-box;
+	display:table;
+	height:auto;
 }

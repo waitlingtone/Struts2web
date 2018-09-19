@@ -10,6 +10,18 @@
 	 <result name="success" type="json">/includes/div-post.jsp</result>
 	 <result name="error">/WEB-INF/error.jsp</result>
  </action>
+ <action name="getCommentPost"
+ 		 class="project.action.HomeAction"
+ 		 method="getCommentWithPostId">
+ <result name="success">/includes/div-comment-post.jsp</result>
+ </action>
+ 
+  <action name="createComment" 
+ 		 class="project.action.HomeAction"
+ 		 method="insertCommentPost">
+ 	<result name="success">/includes/div-single-comment-post.jsp</result>
+ 	<result name="error">/WEB-INF/error.jsp</result>
+ </action>
  
  </package>
  </struts>

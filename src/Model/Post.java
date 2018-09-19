@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.Date;
-
 public class Post {
 	private int postId;
 	

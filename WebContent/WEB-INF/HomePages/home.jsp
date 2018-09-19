@@ -54,7 +54,7 @@
         </div>
       </form>
        --%><ul class="nav navbar-nav navbar-right">
-        <li><a href="profile"><span class="glyphicon glyphicon-user"></span></a></li>
+        <li><a href="profile"><span class="glyphicon glyphicon-user">${member.getName}</span></a></li>
         <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
       </ul>
     </div>
@@ -123,8 +123,6 @@
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src='<s:url value="/includes/script/home-script.js"/>'></script>
-<script type="text/javascript">
 
-</script>
 </body>
 </html>
