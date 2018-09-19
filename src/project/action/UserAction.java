@@ -24,7 +24,9 @@ public class UserAction extends ActionSupport implements ModelDriven<Member>{
 	private Profile memProfile = null;
 	private Member member = new Member();
 	public String home() {
-		
+		return SUCCESS;
+	}
+	public String getUpdateForm() {
 		
 		return SUCCESS;
 	}

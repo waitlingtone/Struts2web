@@ -1,9 +1,17 @@
 package project.action;
 
 import java.io.File;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
@@ -13,14 +21,16 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.ValueStack;
 
 import Model.Member;
 import Model.Profile;
 import connection.oracle.ConnectionDAO;
 import connection.oracle.ProfileConnection;
 
-public class FileUploadAction extends ActionSupport{
+public class FileUploadAction extends ActionSupport implements ServletRequestAware{
 	/**
 	 * 
 	 */
@@ -31,18 +41,20 @@ public class FileUploadAction extends ActionSupport{
 	private String userImageFileName;
 	private Profile memProfile;
 	private Member member;
-	
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 	String query;
 	Integer memberId = (Integer) ActionContext.getContext().getSession().get("memberId");
-	
-	public String profileLoad() throws SQLException
+	public HttpServletRequest request;
+
+	public String profileLoad() throws SQLException, ParseException
 	{
-		
+		System.out.println(memberId);
 		rs = (ResultSet) ProfileConnection.getProfileByID(memberId);
 		memProfile = new Profile();
 		member = new Member();
+		
+		
 	
 		while (rs.next()) {
 			memProfile.setProfileId(rs.getInt("id"));
@@ -53,24 +65,34 @@ public class FileUploadAction extends ActionSupport{
 			member.setFirstname(rs.getString("first_name"));
 			member.setLastname(rs.getString("last_name"));
 			member.setAddress(rs.getString("Address"));
-			member.setBirthday(rs.getDate("Birthday"));
+
+			member.setBirthday(rs.getDate("birthday"));
 			member.setPhone(rs.getString("Phone"));
 			member.setMemberId(memberId);
-			
+			member.setSex(rs.getInt("sex"));
+			member.setEmail(rs.getString("email"));
+			member.setPassport(rs.getString("passport"));
 //			session.put("userAva", memProfile.getAvatar());
 		}
-		
+	
+		System.out.println(member.getFirstname());
+		System.out.println(member.getBirthday());
 		return SUCCESS;
 	}
 	@Override
 	public String execute() throws Exception {
 		try
 		{	
-			String concatStr = "includes/pictures/avatar";
+			String concatStr = "/includes/pictures/avatar";
+
 			String filePath = ServletActionContext.getServletContext().getRealPath("/").concat(concatStr);
+//			String filePathProject =  request.getContextPath().concat(concatStr);
 			System.out.println("Image Loaction:" + filePath);
-			File fileToCreate = new File(filePath,userImageFileName);
-			FileUtils.copyFile(userImage, fileToCreate);
+//			System.out.println("Project Inmage Location: " + filePathProject);
+			File filetoCreate = new File(filePath,userImageFileName);
+//			File filetoCreateProject = new File(filePathProject,userImageFileName);
+			FileUtils.copyFile(userImage, filetoCreate);
+//			FileUtils.copyFile(userImage, filetoCreateProject);
 	    
             
 	        String local = "/includes/pictures/avatar/" + userImageFileName;
@@ -91,6 +113,18 @@ public class FileUploadAction extends ActionSupport{
 		finally {
 			ConnectionDAO.connection().close();
 		}
+	}
+	public String saveDataChange() throws SQLException, ParseException
+	{
+		boolean isSuccess = ProfileConnection.updateProfilebyId(member);
+		if(isSuccess == true)
+		{	
+			
+			return SUCCESS;
+		}
+		return ERROR;
+		
+		
 	}
 	//Getter and Setter
 	public File getUserImage() {
@@ -122,6 +156,11 @@ public class FileUploadAction extends ActionSupport{
 	}
 	public void setMember(Member member) {
 		this.member = member;
+	}
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		 this.request = request;  
+		
 	}
 
 }

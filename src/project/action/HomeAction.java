@@ -29,7 +29,7 @@ public class HomeAction extends ActionSupport {
 	ResultSet rs = connection.oracle.ProfileConnection.getProfileByID(id);
 		while(rs.next()) {
 			profile.setAvatar("/Struts2web"+rs.getString("Avatar"));
-			profile.setCoverphoto(rs.getString("CoverPhoto"));
+			profile.setCoverPhoto(rs.getString("CoverPhoto"));
 		}
 	}
 	public String home() throws SQLException {

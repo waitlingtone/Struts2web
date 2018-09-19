@@ -1,0 +1,49 @@
+<style type="text/css">
+
+	#ownerProfile
+	{
+		color:blue;
+	}
+	.col-sm-4{
+		border-right: 1px solid blue;
+		
+	}
+	.col-sm-8{
+		
+	}
+	#updateImage{
+		text-align: center;
+	}
+	
+	label[for="imageavatar_src"], label[for="username"],
+	{color:red;}
+	#update_Show .label{
+		color:red;
+		font-size: 15px;
+		width:180px;
+	    clear:left;
+	    text-align:right;
+	    padding-right:10px;
+	}
+	
+	#imageavatar_src{
+		white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    width: 250px;
+	}
+	.div-form{
+		display:none;
+		opacity: 0.6;
+		background:#000;
+		position:fixed;
+		top:0%;
+		left: 0%;
+		right: 0%;
+		bottom: 0%;
+		z-index:100;
+	}
+	.visited{
+		display:block !important;
+	}
+</style>

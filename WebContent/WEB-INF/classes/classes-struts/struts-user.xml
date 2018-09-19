@@ -5,7 +5,6 @@
 <struts>
 <constant name="struts.enable.DynamicMethodInvocation" value="true" />
 <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
-
 <package name="user" namespace="/" extends="default">
 
 <action name="profile" class="project.action.FileUploadAction" method="profileLoad">
@@ -13,7 +12,15 @@
 	<result name="success">/WEB-INF/HomePages/profile.jsp</result>
 
 </action>
-
+<action name="updateProfile" class="project.action.FileUploadAction" method="profileLoad">
+<result name="success">/includes/div-update-user.jsp</result>
+<result name="error">/WEB-INF/error.jsp</result>
+</action>
+<action name="saveChangeData" class="project.action.FileUploadAction" method="saveDataChange">
+	<result name="success">/WEB-INF/HomePages/profile.jsp</result>
+	<result name="input">/WEB-INF/HomePages/profile.jsp</result>
+	<result name="error">/WEB-INF/error.jsp</result>
+</action>
 <action name="uploadImg" class="project.action.FileUploadAction">
 	<interceptor-ref name="fileUpload">
 		<param name="maximumsize">2097152</param>
