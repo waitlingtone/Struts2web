@@ -22,10 +22,12 @@
 	</global-results>
 
     </package>
+    <include file="classes-struts/struts-post.xml"></include>
+    <include file="classes-struts/struts-user.xml"/>
     <include file="classes-struts/struts-home.xml"/>
     <include file="classes-struts/struts-login.xml"/>
-   
+    <include file="classes-struts/struts-member.xml"/>
     <include file="classes-struts/struts-register.xml"/>
-    <include file="classes-struts/struts-user.xml"/>
+    
 
 </struts>

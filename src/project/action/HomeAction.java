@@ -28,51 +28,91 @@ public class HomeAction extends ActionSupport {
 	private Comment comment;
 	private Map<String, Object> session = ActionContext.getContext().getSession();
 	
-	protected void getProfileImage(Integer id)throws SQLException {
-	profile = new Profile();
-	ResultSet rs = connection.oracle.ProfileConnection.getProfileByID(id);
-		while(rs.next()) {
-			profile.setAvatar("/Struts2web"+rs.getString("Avatar"));
-			profile.setCoverPhoto(rs.getString("CoverPhoto"));
-		}
-	}
+	private TriviaPost triviaPost;
+	private TriviaComment triviaComment;
+	
 	public String getCommentWithPostId()throws Exception{
-		ResultSet rs_comment_list = connection.oracle.PostConnection.getListCommentWithPostId(post.getPostId());
+		profile = new Profile();
+		triviaComment = new TriviaComment();
 		list_comment = new ArrayList<>();
-		if(rs_comment_list != null) {
-			while(rs_comment_list.next()) {
-				comment = new Comment();
-				comment.setId(rs_comment_list.getInt("Id"));
-				comment.setContent(rs_comment_list.getString("content"));
-				list_comment.add(comment);
-			}
+		
+		profile.getProfileByMemberId((Integer) session.get("memberId"));
+
+		list_comment = triviaComment.getCommentsByPostId(post.getPostId());
+		if(list_comment != null)
 			return SUCCESS;
-		}
 		return ERROR;
-	}
-	public String home() throws SQLException {
-		getProfileImage((Integer) session.get("memberId"));
-		ResultSet rs = connection.oracle.PostConnection.getListPost((Integer) session.get("memberId"));
-		list = new ArrayList<>();
-		if(rs != null) {
-			while(rs.next()) {
-				Post post = new Post();
-				post.setPostId(rs.getInt("id"));
-				post.setTitle(rs.getString("title"));
-				post.setContent(rs.getString("content"));
-				post.setImage(rs.getString("Image"));
-				post.setPostDate(rs.getDate("UPDATE_AT"));
-				list.add(post);
-			}
-			return SUCCESS;
-		}
-		return ERROR;
+		
+//		ResultSet rs = connection.oracle.PostConnection.getListCommentWithPostId(post.getPostId());
+
+//		if(rs != null) {
+//			while(rs.next()) {
+//				comment = new Comment();
+//				comment.setId(rs.getInt("Id"));
+//				comment.setMemberId(rs.getInt("MEMBERID"));
+//				comment.setPostId(rs.getInt("POSTID"));
+//				comment.setAvatar("/Struts2web" + rs.getString("avatar"));
+//				comment.setContent(rs.getString("content"));
+//				comment.setCmt_person(rs.getString("FULLNAME"));
+//				comment.setCreate_at(rs.getDate("create_at"));
+//				comment.setUpdate_at(rs.getDate("update_at"));
+//				list_comment.add(comment);
+//			}
+//			
+//			return SUCCESS;
+//		}
+//		return ERROR;
 	}
 	
+	public String home() throws Exception {
+		profile = new Profile();
+		list = new ArrayList<>();
+		triviaPost = new TriviaPost();
+		profile.getProfileByMemberId((Integer) session.get("memberId"));
+		
+//		list = getListPostByMemberId((Integer) session.get("memberId"));
+		
+		list = triviaPost.getPostsByMemberId((Integer) session.get("memberId"));
+		
+		if(list != null) {
+			return SUCCESS;
+		}
+		return ERROR;
+	}
+//	public List<Post> getListPostByMemberId(Integer memberid) throws SQLException{
+//		ResultSet rs = connection.oracle.PostConnection.getListPost(memberid);
+//		list = new ArrayList<>();
+//		if(rs != null) {
+//			while(rs.next()) {
+//				Post post = new Post();
+//				post.setPostId(rs.getInt("id"));
+//				post.setTitle(rs.getString("title"));
+//				post.setContent(rs.getString("content"));
+//				post.setImage(rs.getString("Image"));
+//				post.setPostDate(rs.getDate("UPDATE_AT"));
+//				list.add(post);
+//			}
+//			return list;
+//		}
+//		return null;
+//	}
+	
+//	protected void commentInfomation(Integer id) throws Exception{
+//		ResultSet rs_profile = connection.oracle.ProfileConnection.getProfileByID(id);
+//		if(rs_profile != null) {
+//			while(rs_profile.next()) {
+//				comment.setCmt_person(rs_profile.getString("first_name") + " " + rs_profile.getString("last_name"));
+//				comment.setAvatar("/Struts2web"+rs_profile.getString("avatar"));
+//				System.out.println(comment.getCmt_person()+" person");
+//				System.out.println(comment.getAvatar());
+//			}
+//		}
+//	}
+	
 	public String insertCommentPost()throws Exception {
-		boolean isSuccess = connection.oracle.PostConnection.addCommentWithPostId(comment, (Integer) session.get("memberId"), post.getPostId());
+		boolean isSuccess = comment.addCommentWithPostId(comment, (Integer) session.get("memberId"), post.getPostId());
 		if(isSuccess) {
-			System.out.println(post.getContent());
+//			commentInfomation((Integer) session.get("memberId"));
 			return SUCCESS;
 		}
 		return ERROR;
@@ -89,12 +129,14 @@ public class HomeAction extends ActionSupport {
 	public String createPost() throws Exception{
 		try {
 			Date date = new Date();
-			getProfileImage((Integer) session.get("memberId"));
-			post.setMemberId((int) session.get("memberId"));
+			profile = new Profile();
+			profile.getProfileByMemberId((Integer) session.get("memberId"));
+			
+			post.setMemberId((Integer) session.get("memberId"));
 			post.setPostDate(date);
-			Integer isSuccess = connection.oracle.PostConnection.createPost(post);
-			System.out.println(post);
-			if(isSuccess == 1) {
+//			Integer isSuccess = connection.oracle.PostConnection.createPost(post);
+			boolean rs = post.insertPost();
+			if(rs) {
 				return SUCCESS;
 			}
 		}catch(Exception e) {
@@ -135,4 +177,19 @@ public class HomeAction extends ActionSupport {
 	public void setList_comment(List<Comment> list_comment) {
 		this.list_comment = list_comment;
 	}
+	public TriviaPost getTriviaPost() {
+		return triviaPost;
+	}
+	public void setTriviaPost(TriviaPost triviaPost) {
+		this.triviaPost = triviaPost;
+	}
+
+	public TriviaComment getTriviaComment() {
+		return triviaComment;
+	}
+
+	public void setTriviaComment(TriviaComment triviaComment) {
+		this.triviaComment = triviaComment;
+	}
+
 }

@@ -1,6 +1,7 @@
 package project.action;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +36,6 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	private File userImage;
 	private String userImageContentType;
 	private String userImageFileName;
@@ -53,9 +53,6 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 		rs = (ResultSet) ProfileConnection.getProfileByID(memberId);
 		memProfile = new Profile();
 		member = new Member();
-		
-		
-	
 		while (rs.next()) {
 			memProfile.setProfileId(rs.getInt("id"));
 			memProfile.setUserId(memberId);
@@ -84,8 +81,8 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 		try
 		{	
 			String concatStr = "/includes/pictures/avatar";
-
 			String filePath = ServletActionContext.getServletContext().getRealPath("/").concat(concatStr);
+			
 //			String filePathProject =  request.getContextPath().concat(concatStr);
 			System.out.println("Image Loaction:" + filePath);
 //			System.out.println("Project Inmage Location: " + filePathProject);
