@@ -7,13 +7,35 @@
  <action name="register">
  	<result>/WEB-INF/AuthenticatePages/register.jsp</result>
  </action>
+ <action name="test">
+ 	<result>/WEB-INF/AuthenticatePages/email.jsp</result>
+ </action>
  	<action name="register-action"
  			class="project.action.RegisterAction"
  			method ="registerMember">
- 		<result name="success">/WEB-INF/index.jsp</result>
+ 		<result name="success">/WEB-INF/AuthenticatePages/email.jsp</result>
  		<result name="input">/WEB-INF/AuthenticatePages/register.jsp</result>
  		<result name = "error">/WEB-INF/error.jsp</result>
  	</action>
- 
+ 	<action name="emailer"
+ 			class="project.action.EmailerAction"
+ 			method="sendEmailToMember">
+ 		<result name="success">/WEB-INF/AuthenticatePages/email.jsp</result>
+ 		<result name="error">/WEB-INF/error.jsp</result>
+ 		<result name="input">/WEB-INF/index.jsp</result>
+ 	</action>
+ 	<action name="doCreateHashString"
+ 			class="project.action.EmailerAction"
+ 			method="createHashString">
+ 		<result name="success">/WEB-INF/testPage.jsp</result>
+ 		<result name="input">/WEB-INF/testPage.jsp</result>
+ 	</action>
+ 	<action name="doCheckCode"
+ 			class="project.action.EmailerAction"
+ 			method="checkVerifyCode">
+ 		<result name="success" type="redirect">profile</result>
+ 		<result name="input">/WEB-INF/AuthenticatePages/email.jsp</result>
+ 		<result name="error">/WEB-INF/error.jsp</result>
+ 	</action>
  </package>
  </struts>

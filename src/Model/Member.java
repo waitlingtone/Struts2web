@@ -1,8 +1,5 @@
 package Model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Member {
 	private Integer memberId;
 	private String username;
@@ -15,6 +12,7 @@ public class Member {
 	private String passport;
 	private Integer sex;
 	private java.util.Date birthday;
+	private String verifyCode;
 	
 	public Member() {}
 	public Member(String username, String password) {
@@ -92,5 +90,11 @@ public class Member {
 		name = firstname + " " + lastname;
 		return name;
 	}
-	
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
+
 }

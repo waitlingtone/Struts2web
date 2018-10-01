@@ -32,13 +32,11 @@ div.a{
 <span style = "text-align:center"> Đăng kí</span>
 </h2>
 <s:form action ="register-action" cssClass = "well form-vertical" theme = "bootstrap" method= "POST">
-<div class="form-group">
-<s:textfield  name="member.username" label="Username" ></s:textfield> <input type="button" class="btn btn-default" value="check"></input>
-</div>
+<s:textfield id="tf_username" name="member.username" label="Username" ></s:textfield>
 <s:password  name="member.password" label="Password"></s:password>
 <s:textfield  name="member.firstname" label="First name"></s:textfield>
 <s:textfield name="member.lastname" label="Last name"></s:textfield>
-<s:textfield type="email" name="member.email" label="Email address"></s:textfield>
+<s:textfield id="tf_email" type="email" name="member.email" label="Email address"></s:textfield>
 <s:textfield name="member.phone" label="Phone number"></s:textfield>
 <s:textfield name="member.address" label="Address"></s:textfield>
 <s:textfield name="member.passport" label="Passport"></s:textfield>
@@ -51,4 +49,5 @@ div.a{
 </div>
 
 </body>
+<script type="text/javascript" src='<s:url value="/includes/script/register-script.js"/>'></script>
 </html>

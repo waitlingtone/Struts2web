@@ -31,13 +31,23 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	
 	
 	public String login() throws Exception{
-		Integer isActive = connection.oracle.AuthenticateMemberConnection.Authenticate(member);
-		if(isActive != 0) {
-			session.put("memberId", isActive);
-			member.setMemberId(isActive);
-			return SUCCESS;
+		Integer idOfMember = connection.oracle.AuthenticateMemberConnection.Authenticate(member);
+		String rString = ERROR;
+		if(idOfMember != 0) {
+			session.put("memberId", idOfMember);
+			member.setMemberId(idOfMember);
+			if(idOfMember == -1)
+			{
+				
+				rString= "needverify";
+			}
+			else {
+			rString =  SUCCESS;
+			}
 		}
-		return ERROR;
+		
+		System.out.println(rString);
+		return rString;
 	}
 	
 	@SkipValidation

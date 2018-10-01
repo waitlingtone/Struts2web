@@ -53,6 +53,8 @@ div.b{
   </div>
   </s:form>
 </div>
+<div>
+	<p><a href="test">Email</a><p>
 </div>
 
 </body>

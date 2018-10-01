@@ -54,7 +54,7 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 		memProfile = new Profile();
 		member = new Member();
 		
-		
+		String rString;
 	
 		while (rs.next()) {
 			memProfile.setProfileId(rs.getInt("id"));
@@ -77,6 +77,8 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 	
 		System.out.println(member.getFirstname());
 		System.out.println(member.getBirthday());
+		rString = SUCCESS;
+		System.out.println(rString);
 		return SUCCESS;
 	}
 	@Override
@@ -84,15 +86,18 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 		try
 		{	
 			String concatStr = "/includes/pictures/avatar";
-
+			
 			String filePath = ServletActionContext.getServletContext().getRealPath("/").concat(concatStr);
-//			String filePathProject =  request.getContextPath().concat(concatStr);
-			System.out.println("Image Loaction:" + filePath);
-//			System.out.println("Project Inmage Location: " + filePathProject);
+			int findFirstDot = filePath.indexOf('.');
+			String subString = filePath.substring(0, findFirstDot);
+			String filePathProject = subString.concat("Struts2web/WebContent"+concatStr);
+			System.out.println(subString);
+			System.out.println("Image Loaction:" + filePath);			
+			System.out.println("Project Inmage Location : "+ filePathProject);
 			File filetoCreate = new File(filePath,userImageFileName);
-//			File filetoCreateProject = new File(filePathProject,userImageFileName);
+			File filetoCreateProject = new File(filePathProject,userImageFileName);
 			FileUtils.copyFile(userImage, filetoCreate);
-//			FileUtils.copyFile(userImage, filetoCreateProject);
+			FileUtils.copyFile(userImage, filetoCreateProject);
 	    
             
 	        String local = "/includes/pictures/avatar/" + userImageFileName;
