@@ -42,26 +42,29 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="home">home</a></li>
         <li><a href="#">Messages</a></li>
-      </ul>
-      <%-- <form class="navbar-form navbar-right" role="search">
+        <li>
+        <s:form class="navbar-form" autocomplete="off" id="frmSearchMember" method="POST" action="searchMember">
         <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Search..">
+          <input type="text" id="search-name" name="search-name" class="form-control" placeholder="Search..">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button class="btn btn-default" type="button" id="btn-searchMember">
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </span>        
         </div>
-      </form>
-       --%><ul class="nav navbar-nav navbar-right">
+        <div class="dropdown-content">
+        </div>
+      </s:form></li>
+      </ul>
+       <ul class="nav navbar-nav navbar-right">
         <li><a href="profile"><span class="glyphicon glyphicon-user">${member.getName}</span></a></li>
         <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
       </ul>
     </div>
   </div>
 </nav>
-  
-<div class="container text-center">    
+<div id="main-container">
+<div class="container text-center" >    
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
@@ -94,6 +97,7 @@
         </div>
       </div>
       <div id="resultDiv">
+      <div id="showPostEdit"></div>
       <div class="presentation"></div>
       <s:iterator value="list">
 		<%@ include file="/includes/div-post.jsp" %>
@@ -117,7 +121,7 @@
     </div>
   </div>
 </div>
-
+</div>
 <footer class="container-fluid text-center">
   <p>Footer Text</p>
 </footer>

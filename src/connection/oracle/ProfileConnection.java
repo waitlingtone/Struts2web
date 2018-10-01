@@ -22,7 +22,6 @@ public class ProfileConnection {
 	public static ResultSet getProfileByID(Integer memberid) throws SQLException 
 	{
 		try {
-			
 			String psQuery = "SELECT * FROM PROFILE p JOIN Member m ON p.MemberID = m.id  WHERE m.id = ?";
 			PreparedStatement ps = ConnectionDAO.connection().prepareStatement(psQuery);
 			ps.setInt(1, memberid);
@@ -33,9 +32,8 @@ public class ProfileConnection {
 			return null;
 		}
 		finally {
-			connection.oracle.ConnectionDAO.connection().close();
+			ConnectionDAO.connection().close();
 		}
-		
 	}
 	public static boolean updateProfilebyId(Member member) throws SQLException
 	{

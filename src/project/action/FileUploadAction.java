@@ -1,6 +1,7 @@
 package project.action;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +36,6 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	private File userImage;
 	private String userImageContentType;
 	private String userImageFileName;
@@ -53,7 +53,6 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 		rs = (ResultSet) ProfileConnection.getProfileByID(memberId);
 		memProfile = new Profile();
 		member = new Member();
-		
 		String rString;
 	
 		while (rs.next()) {
@@ -98,6 +97,78 @@ public class FileUploadAction extends ActionSupport implements ServletRequestAwa
 			File filetoCreateProject = new File(filePathProject,userImageFileName);
 			FileUtils.copyFile(userImage, filetoCreate);
 			FileUtils.copyFile(userImage, filetoCreateProject);
+	    
+            
+	        String local = "/includes/pictures/avatar/" + userImageFileName;
+	        System.out.println(local);
+	        query = "update PROFILE set avatar = ? where memberid= ?";
+	        ps = ConnectionDAO.connection().prepareStatement(query);
+	        ps.setString(1, local);
+	        ps.setInt(2, memberId);
+	        ps.executeUpdate();
+	        return SUCCESS;
+	        
+		}
+		catch(Exception e)
+		{
+			System.out.println("uploadPicAction" + e);
+			return ERROR;
+		}
+		finally {
+			ConnectionDAO.connection().close();
+		}
+	}
+	public String saveDataChange() throws SQLException, ParseException
+	{
+		boolean isSuccess = ProfileConnection.updateProfilebyId(member);
+		if(isSuccess == true)
+		{	
+			
+			return SUCCESS;
+		}
+		return ERROR;
+		
+		
+	}
+	//Getter and Setter
+	public File getUserImage() {
+		return userImage;
+	}
+	public void setUserImage(File userImage) {
+		this.userImage = userImage;
+	}
+	public String getUserImageContentType() {
+		return userImageContentType;
+	}
+	public void setUserImageContentType(String userImageContentType) {
+		this.userImageContentType = userImageContentType;
+	}
+	public String getUserImageFileName() {
+		return userImageFileName;
+	}
+	public void setUserImageFileName(String userImageFileName) {
+		this.userImageFileName = userImageFileName;
+	}
+	 public Profile getMemProfile() {
+			return memProfile;
+		}
+	public void setMemProfile(Profile memProfile) {
+		this.memProfile = memProfile;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		 this.request = request;  
+		
+	}
+
+}
+
 	    
             
 	        String local = "/includes/pictures/avatar/" + userImageFileName;

@@ -5,7 +5,10 @@
 <struts>
 <constant name="struts.enable.DynamicMethodInvocation" value="true" />
 <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
-<package name="user" namespace="/" extends="default">
+<constant name="struts.enable.SlashesInActionNames" value="true"/>
+<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+<constant name="struts.patternMatcher" value="regex" />
+<package name="user" namespace="/" extends="default, home">
 
 <action name="profile" class="project.action.FileUploadAction" method="profileLoad">
 	<interceptor-ref name="loginStack"/>
@@ -29,6 +32,18 @@
 	<interceptor-ref name="loginStack"/>
 		<result name="success" type="redirect">profile</result>
 		<result name="input">/WEB-INF/HomePages/profile.jsp</result>  
+		<result name="error">/WEB-INF/error.jsp</result>
+</action>
+<action name="/user/{id}/home"
+		class="project.action.UserAction"
+		method="getUserSearchById">
+		<result name="success">/WEB-INF/HomePages/guest-home.jsp</result>
+		<result name="error">/WEB-INF/error.jsp</result>
+</action>
+<action name="/user/{id}/getCommentPost"
+		class="project.action.HomeAction"
+		method="getCommentWithPostId">
+		<result name="success">/includes/div-comment-post.jsp</result>
 		<result name="error">/WEB-INF/error.jsp</result>
 </action>
 

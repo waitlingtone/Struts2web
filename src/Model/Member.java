@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.ResultSet;
 public class Member {
 	private Integer memberId;
 	private String username;
@@ -67,7 +68,7 @@ public class Member {
 	public void setPassport(String passport) {
 		this.passport = passport;
 	}
-	public int getSex() {
+	public Integer getSex() {
 		return sex;
 	}
 	public void setSex(Integer sex) {
@@ -96,5 +97,23 @@ public class Member {
 	public void setVerifyCode(String verifyCode) {
 		this.verifyCode = verifyCode;
 	}
+	public Member getMemberById(Integer memberId) throws Exception{
+		ResultSet rs = connection.oracle.MemberConnection.getInformationMember(memberId);
+		if(rs != null) {
+			while(rs.next()){
+				this.setFirstname(rs.getString("first_name"));
+				this.setLastname(rs.getString("last_name"));
+				this.setAddress(rs.getString("Address"));
+				this.setBirthday(rs.getDate("birthday"));
+				this.setPhone(rs.getString("Phone"));
+				this.setMemberId(memberId);
+				this.setSex(rs.getInt("sex"));
+				this.setEmail(rs.getString("email"));
+				this.setPassport(rs.getString("passport"));
+			}
+		}
+		return this;
+	}
+	
 
 }

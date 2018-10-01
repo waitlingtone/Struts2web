@@ -1,20 +1,21 @@
 package Model;
 
 import java.util.Date;
+
 public class Post {
-	private int postId;
+	private Integer postId;
 	
 	private String title;
 	private String content;
 	
-	private int memberId;
+	private Integer memberId;
 	private String image;
-	
+	private Date updateAt;
 	private Date postDate;
-	public int getPostId() {
+	public Integer getPostId() {
 		return postId;
 	}
-	public void setPostId(int postId) {
+	public void setPostId(Integer postId) {
 		this.postId = postId;
 	}
 	public String getTitle() {
@@ -29,10 +30,10 @@ public class Post {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(int memberid) {
+	public void setMemberId(Integer memberid) {
 		this.memberId = memberid;
 	}
 	public String getImage() {
@@ -47,5 +48,30 @@ public class Post {
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+	/********************************************************************************/
+	/********************************** Method ************************************/
+	/********************************************************************************/
+	public boolean insertPost() throws Exception{
+		Integer result = connection.oracle.PostConnection.createPost(this);
+		if(result == 1)
+			return true;
+		return false;
+	}
+	
+	public boolean editPost()throws Exception{
+		return connection.oracle.PostConnection.updatePost(this);
+	}
+	public boolean removePost()throws Exception{
+		return true;
+	}
+	/********************************************************************************/
+		/****************************** End *************************************/
+	/********************************************************************************/
 
 }
